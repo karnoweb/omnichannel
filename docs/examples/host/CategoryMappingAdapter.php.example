@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Omnichannel;
+
+use Karnoweb\Omnichannel\Contracts\InternalCategoryResolverContract;
+
+final class CategoryMappingAdapter implements InternalCategoryResolverContract
+{
+    public function existsForBranch(string $internalCategoryId, int|string $branchId): bool
+    {
+        // Host validates category id ownership for the branch.
+        return true;
+    }
+}

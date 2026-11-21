@@ -1,0 +1,64 @@
+{
+    "name": "karnoweb/omnichannel",
+    "description": "Domain Omnichannel package for Laravel: social channels, messengers, marketplace connections, publishing, scheduling, and unified channel foundation. Data and services only — no host UI.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "omnichannel",
+        "social",
+        "publishing",
+        "messengers",
+        "marketplace"
+    ],
+    "authors": [
+        {
+            "name": "Karnoweb",
+            "email": "info@karnoweb.com"
+        }
+    ],
+    "version": "13.3.0",
+    "require": {
+        "php": "^8.3",
+        "illuminate/console": "^13.0",
+        "illuminate/contracts": "^13.0",
+        "illuminate/database": "^13.0",
+        "illuminate/events": "^13.0",
+        "illuminate/http": "^13.0",
+        "illuminate/queue": "^13.0",
+        "illuminate/support": "^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^11.0",
+        "phpunit/phpunit": "^11.0|^12.0|^13.0",
+        "laravel/pint": "^1.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "Karnoweb\\Omnichannel\\": "src/",
+            "Karnoweb\\Omnichannel\\Database\\Factories\\": "database/factories/",
+            "Karnoweb\\Omnichannel\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Karnoweb\\Omnichannel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Karnoweb\\Omnichannel\\OmnichannelServiceProvider"
+            ],
+            "aliases": {
+                "Omnichannel": "Karnoweb\\Omnichannel\\Facades\\Omnichannel"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "pint": "pint --format agent"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,16 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Omnichannel;
+
+use Karnoweb\Omnichannel\Contracts\CatalogSyncTriggerContract;
+use Karnoweb\Omnichannel\Models\Publication;
+
+final class CatalogSyncAdapter implements CatalogSyncTriggerContract
+{
+    public function recordChange(Publication $publication, array $snapshot): void
+    {
+        // Forward host price/stock snapshots into Omnichannel when catalog sync is enabled.
+    }
+}

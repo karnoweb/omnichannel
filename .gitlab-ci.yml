@@ -1,0 +1,19 @@
+stages:
+  - test
+
+variables:
+  COMPOSER_CACHE_DIR: "$CI_PROJECT_DIR/.composer-cache"
+
+phpunit:
+  stage: test
+  image: php:8.3-cli
+  before_script:
+    - apt-get update -yqq && apt-get install -yqq git unzip libzip-dev sqlite3
+    - docker-php-ext-install zip pdo_sqlite
+    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer install --no-interaction --prefer-dist
+  script:
+  - vendor/bin/pint --test
+  - vendor/bin/phpunit --exclude-group redis
+  - composer validate --strict
+  - composer audit || true
