@@ -1,6 +1,6 @@
 # karnoweb/omnichannel
 
-Laravel package for multi-channel publication (9 drivers). Version **13.3.0** (Phase 03: free-form publishing, batch multi-connection publishing, dedicated media, taxonomy mapping, catalog sync foundation).
+Laravel package for multi-channel publication (9 drivers). Version **13.3.1** (Phase 03: free-form publishing, batch multi-connection publishing, dedicated media, taxonomy mapping, catalog sync foundation).
 
 ## Requirements
 
@@ -15,7 +15,7 @@ php artisan vendor:publish --tag=omnichannel-config
 php artisan migrate
 ```
 
-See `docs/hardening/UPGRADE-GUIDE.md`, `docs/phase-02/`, and `docs/phase-03/UPGRADING.md` for release notes.
+Release notes: [CHANGELOG.md](CHANGELOG.md), [UPGRADING.md](UPGRADING.md), [docs/releases/](docs/releases/README.md). Roadmap: [ROADMAP.md](ROADMAP.md). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md). Phase 5 reports: [docs/phase-05/](docs/phase-05/README.md). Legacy: `docs/hardening/UPGRADE-GUIDE.md`, `docs/phase-02/`, `docs/phase-03/UPGRADING.md`.
 
 ## Tests
 

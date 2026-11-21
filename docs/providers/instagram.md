@@ -70,6 +70,12 @@ PPA، Advanced Access، شرایط Meta Business — IG-S001. هزینه API ا�
 | IG-VAL-001 | انتشار تصویر | حساب IG Professional + app Meta | OAuth scopes پکیج | media_id | حذف دستی پست | برنامه‌ریزی‌شده |
 | IG-VAL-002 | سهمیه | همان | — | quota_usage | — | برنامه‌ریزی‌شده |
 
+## به‌روزرسانی فاز ۵.۲ (۲۰۲۶-۱۱-۲۱)
+
+- تست قرارداد: `tests/Drivers/InstagramCapabilitiesTest.php`
+- جریان انتشار: `docs/phase-05/step-02/INSTAGRAM-PUBLISHING-FLOW.md`
+- احراز هویت/بازیابی: `docs/phase-05/step-02/INSTAGRAM-AUTH-AND-RECOVERY.md`
+
 ### پرسش‌های باز
 
 | شناسه | اولویت | پرسش | دلیل عدم قطعیت | اثر |
