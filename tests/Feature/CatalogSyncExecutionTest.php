@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Channels\Basalam\BasalamDriver;
 use Karnoweb\Omnichannel\Enums\CatalogSyncStatus;
@@ -24,7 +23,6 @@ use Karnoweb\Omnichannel\ValueObjects\CatalogListingIdentity;
 
 final class CatalogSyncExecutionTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineEnvironment($app): void
     {

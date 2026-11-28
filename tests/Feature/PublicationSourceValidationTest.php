@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Contracts\PublicationSourceResolverContract;
 use Karnoweb\Omnichannel\Data\CreatePublicationData;
@@ -23,7 +22,6 @@ use RuntimeException;
 
 final class PublicationSourceValidationTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineEnvironment($app): void
     {

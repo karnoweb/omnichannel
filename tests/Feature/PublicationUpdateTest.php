@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Str;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Enums\FailureClass;
@@ -20,7 +19,6 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
 
 final class PublicationUpdateTest extends TestCase
 {
-    use DatabaseMigrations;
 
     protected function defineEnvironment($app): void
     {

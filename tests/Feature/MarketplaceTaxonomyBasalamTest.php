@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Models\Channel;
 use Karnoweb\Omnichannel\Models\ChannelConnection;
@@ -14,7 +13,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class MarketplaceTaxonomyBasalamTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineEnvironment($app): void
     {

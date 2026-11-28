@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Karnoweb\Omnichannel\Models\Channel;
@@ -14,7 +13,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class TokenRefreshConcurrencyTest extends TestCase
 {
-    use DatabaseMigrations;
 
     protected function defineEnvironment($app): void
     {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Drivers;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Channels\Instagram\InstagramDriver;
 use Karnoweb\Omnichannel\Enums\FailureClass;
@@ -20,7 +19,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class InstagramDriverOperationsTest extends TestCase
 {
-    use DatabaseMigrations;
 
     private const API = 'https://instagram.test/v26.0';
 

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Schema;
 use Karnoweb\Omnichannel\Support\OmnichannelTables;
 use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class FreshInstallationTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineDatabaseMigrations(): void
     {

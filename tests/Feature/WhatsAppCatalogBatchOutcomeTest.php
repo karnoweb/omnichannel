@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -23,7 +22,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class WhatsAppCatalogBatchOutcomeTest extends TestCase
 {
-    use DatabaseMigrations;
 
     protected function defineEnvironment($app): void
     {

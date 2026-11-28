@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class MigrationRollbackTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineDatabaseMigrations(): void
     {

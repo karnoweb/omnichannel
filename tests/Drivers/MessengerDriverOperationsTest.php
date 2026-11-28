@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Drivers;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Enums\PublicationType;
 use Karnoweb\Omnichannel\Models\Channel;
@@ -16,7 +15,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class MessengerDriverOperationsTest extends TestCase
 {
-    use DatabaseMigrations;
 
     protected function defineEnvironment($app): void
     {

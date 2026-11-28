@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Drivers;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Channels\Basalam\BasalamDriver;
 use Karnoweb\Omnichannel\Contracts\MediaBytesResolverContract;
@@ -17,7 +16,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class BasalamDriverOperationsTest extends TestCase
 {
-    use DatabaseMigrations;
 
     protected function defineEnvironment($app): void
     {

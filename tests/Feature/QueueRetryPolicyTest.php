@@ -6,7 +6,6 @@ namespace Karnoweb\Omnichannel\Tests\Feature;
 
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Karnoweb\Omnichannel\Http\ApiResponse;
@@ -19,7 +18,6 @@ use ReflectionMethod;
 
 final class QueueRetryPolicyTest extends TestCase
 {
-    use DatabaseMigrations;
 
     protected function tearDown(): void
     {

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Karnoweb\Omnichannel\Support\OmnichannelTables;
@@ -14,7 +13,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class UpgradeFrom130Test extends TestCase
 {
-    use RefreshDatabase;
 
     private const MIGRATION_DIR = __DIR__.'/../../database/migrations_squashed';
 
@@ -71,6 +69,10 @@ final class UpgradeFrom130Test extends TestCase
         string $keyType,
         int|string $hostKey,
     ): void {
+        if ($this->usesMysqlTestDatabase()) {
+            self::markTestSkipped('Legacy upgrade scenario requires SQLite as the default connection.');
+        }
+
         $default = DB::getDefaultConnection();
         config([
             'database.connections.legacy_upgrade' => ['driver' => 'sqlite', 'database' => ':memory:', 'foreign_key_constraints' => true],

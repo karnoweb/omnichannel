@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Karnoweb\Omnichannel\Enums\CatalogSyncStatus;
 use Karnoweb\Omnichannel\Enums\PublicationSourceType;
 use Karnoweb\Omnichannel\Enums\PublicationStatus;
@@ -17,7 +16,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class CatalogSyncNoChangeTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineEnvironment($app): void
     {

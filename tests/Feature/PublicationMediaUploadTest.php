@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Enums\MediaAssetStatus;
@@ -15,7 +14,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class PublicationMediaUploadTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineDatabaseMigrations(): void
     {

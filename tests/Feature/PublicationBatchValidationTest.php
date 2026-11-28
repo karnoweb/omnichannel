@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Data\CreatePublicationBatchData;
 use Karnoweb\Omnichannel\Data\PublicationTargetData;
@@ -20,7 +19,6 @@ use RuntimeException;
 
 final class PublicationBatchValidationTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineEnvironment($app): void
     {

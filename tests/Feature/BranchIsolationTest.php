@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Enums\PublicationStatus;
 use Karnoweb\Omnichannel\Enums\PublicationType;
@@ -22,7 +21,6 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
 
 final class BranchIsolationTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineEnvironment($app): void
     {

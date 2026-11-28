@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Exceptions\BranchAccessDeniedException;
 use Karnoweb\Omnichannel\Models\PublicationMediaAsset;
@@ -14,7 +13,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class MediaAssetBranchIsolationTest extends TestCase
 {
-    use RefreshDatabase;
 
     protected function defineDatabaseMigrations(): void
     {
