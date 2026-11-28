@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Omnichannel;
+
+use Karnoweb\Omnichannel\Contracts\PublicationSourceResolverContract;
+use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
+
+/**
+ * نمونه میزبان: resolve محتوای انتشار از منبع Reference (مثلاً پست وبلاگ).
+ * logicalType باید با sourceReferenceType در CreatePublicationData یکی باشد.
+ */
+final class BlogPostPublicationSourceResolver implements PublicationSourceResolverContract
+{
+    public function logicalType(): string
+    {
+        return 'blog_post';
+    }
+
+    public function resolveSnapshot(
+        string $referenceType,
+        int|string $referenceId,
+        int|string $branchId,
+    ): ?PublicationContent {
+        if ($referenceType !== $this->logicalType()) {
+            return null;
+        }
+
+        // میزبان: بارگذاری از DB/CMS با ایزوله شعبه
+        return PublicationContent::fromArray([
+            'caption' => 'Post #'.$referenceId,
+        ]);
+    }
+
+    public function resolveTitle(
+        string $referenceType,
+        int|string $referenceId,
+        int|string $branchId,
+    ): ?string {
+        return 'Blog post '.$referenceId;
+    }
+}

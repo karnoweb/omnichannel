@@ -140,3 +140,7 @@
 ## فاز ۶ — کاتالوگ
 
 همگام‌سازی قیمت/موجودی، taxonomy mock باسلام، همگرایی batch واتس‌اپ. پذیرش مشروط: live taxonomy → فاز ۸.۵. [PHASE-CLOSURE](docs/phase-06/PHASE-CLOSURE.md)
+
+## فاز ۷ — میزبان و DX
+
+راهنمای یکپارچگی، API فارسی، registrar Reference، درایور سفارشی. [PHASE-CLOSURE](docs/phase-07/PHASE-CLOSURE.md)

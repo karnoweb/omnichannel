@@ -16,6 +16,7 @@
 - `CatalogSyncFingerprint`, revision/debounce, `lockForUpdate` در job، بازیابی با فیلتر policy.
 - `CatalogSyncReconciliationService`: همگرایی `Unknown` پس از تأیید batch واتس‌اپ.
 - `BasalamDriver` implements `SupportsMarketplaceTaxonomy`; شمارش catalog در `omnichannel:doctor`.
+- فاز ۷: `docs/phase-07/` — HOST-INTEGRATION، CHECKLIST (G7-01)، PUBLIC-API-FA (G7-02)، HOST-REQUIREMENTS، CUSTOM-DRIVER-GUIDE؛ نمونه registrar میزبان؛ هم‌ترازی UPGRADING با PHP 8.4.1.
 
 
 ---

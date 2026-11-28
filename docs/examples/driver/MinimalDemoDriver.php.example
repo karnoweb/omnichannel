@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Omnichannel\Channels;
+
+use Karnoweb\Omnichannel\Contracts\ChannelDriver;
+use Karnoweb\Omnichannel\Enums\Capability;
+use Karnoweb\Omnichannel\Models\ChannelConnection;
+use Karnoweb\Omnichannel\Models\Publication;
+use Karnoweb\Omnichannel\Results\ConnectionTestResult;
+use Karnoweb\Omnichannel\Results\DeleteResult;
+use Karnoweb\Omnichannel\Results\PublishResult;
+use Karnoweb\Omnichannel\Results\ValidationResult;
+use Karnoweb\Omnichannel\ValueObjects\ChannelCapabilities;
+
+final class MinimalCustomDriver implements ChannelDriver
+{
+    public function key(): string
+    {
+        return 'minimal_custom';
+    }
+
+    public function capabilities(): ChannelCapabilities
+    {
+        return ChannelCapabilities::make(supported: [Capability::Text, Capability::Post, Capability::Update]);
+    }
+
+    public function validate(Publication $publication, ChannelConnection $connection): ValidationResult
+    {
+        return ValidationResult::success();
+    }
+
+    public function publish(Publication $publication, ChannelConnection $connection): PublishResult
+    {
+        return PublishResult::successful('stub-id');
+    }
+
+    public function update(Publication $publication, ChannelConnection $connection): PublishResult
+    {
+        return PublishResult::successful((string) $publication->external_id);
+    }
+
+    public function delete(Publication $publication, ChannelConnection $connection): DeleteResult
+    {
+        return DeleteResult::success();
+    }
+
+    public function testConnection(ChannelConnection $connection): ConnectionTestResult
+    {
+        return ConnectionTestResult::success();
+    }
+}

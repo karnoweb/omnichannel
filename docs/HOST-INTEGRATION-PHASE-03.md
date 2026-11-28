@@ -1,5 +1,7 @@
 # Host integration — Phase 03
 
+**راهنمای اصلی (فاز ۷، فارسی):** [docs/phase-07/HOST-INTEGRATION.md](phase-07/HOST-INTEGRATION.md) و [HOST-INTEGRATION-CHECKLIST.md](phase-07/HOST-INTEGRATION-CHECKLIST.md). این فایل خلاصه انگلیسی مرحله ۰۳ است.
+
 ## Bind host contracts
 
 - `ProductRepository` / `BranchScopedProductRepository` for product-sourced publications and batches.

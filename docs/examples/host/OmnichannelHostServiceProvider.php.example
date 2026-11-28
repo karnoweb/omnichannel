@@ -1,0 +1,21 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Karnoweb\Omnichannel\Services\PublicationSourceRegistry;
+
+final class OmnichannelHostServiceProvider extends ServiceProvider
+{
+    public function boot(): void
+    {
+        /** @var PublicationSourceRegistry $registry */
+        $registry = $this->app->make(PublicationSourceRegistry::class);
+        $registry->register(new \App\Omnichannel\BlogPostPublicationSourceResolver());
+
+        // سایر bindingها: ProductRepository، BranchContextResolverContract،
+        // CatalogSyncTriggerContract، PublicationMediaStorageContract — ر. HOST-INTEGRATION.md
+    }
+}

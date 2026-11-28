@@ -1,6 +1,6 @@
 # راهنمای ارتقا — karnoweb/omnichannel
 
-راهنمای مرکزی فارسی. تاریخچه تغییرات: [CHANGELOG.md](CHANGELOG.md).
+راهنمای مرکزی فارسی. تاریخچه تغییرات: [CHANGELOG.md](CHANGELOG.md). الزام PHP/Laravel میزبان: [docs/phase-07/HOST-REQUIREMENTS.md](docs/phase-07/HOST-REQUIREMENTS.md).
 
 راهنمای کوتاه انگلیسی فاز ۰۳ (دست‌نخورده): [docs/phase-03/UPGRADING.md](docs/phase-03/UPGRADING.md).
 
@@ -22,9 +22,9 @@
 
 | نسخه مبدا | نسخه مقصد | PHP/Laravel | قرارداد | config | DB | صف | میزبان | تست ارتقا | وضعیت |
 |-----------|-----------|-------------|---------|--------|-----|-----|--------|-----------|--------|
-| — | 13.3.0 (نصب تازه) | ^8.3 / ^13 | کامل | publish اختیاری | squashed یک‌جا | پس از migrate | HOST-INTEGRATION | migrate در dev | **تأیید dev** |
-| 13.2.0 | 13.3.0 | ^8.3 / ^13 | بدون breaking اعلامی | کلیدهای 13.3 | 5 migration | catalog job | کاتالوگ | UpgradeFrom130Test پوشش `2026_11_21_*` (فاز ۵.۱) | **مشروط** |
-| 13.1.0 | 13.2.0 | ^8.3 / ^13 | — | — | 11-20 | — | — | **تأیید نشده** | مستند تاریخی |
+| — | 13.3.0 (نصب تازه) | ^8.4.1 / ^13 | کامل | publish اختیاری | squashed یک‌جا | پس از migrate | [HOST-INTEGRATION](docs/phase-07/HOST-INTEGRATION.md) | migrate در dev | **تأیید dev** |
+| 13.2.0 | 13.3.0 | ^8.4.1 / ^13 | بدون breaking اعلامی | کلیدهای 13.3 | 5 migration | catalog job | کاتالوگ | UpgradeFrom130Test پوشش `2026_11_21_*` (فاز ۵.۱) | **مشروط** |
+| 13.1.0 | 13.2.0 | ^8.4.1 / ^13 | — | — | 11-20 | — | — | **تأیید نشده** | مستند تاریخی |
 | 13.1.0 | 13.3.0 | — | — | — | تراکم | — | — | **تأیید نشده** | توصیه: پله‌ای |
 
 جزئیات ماتریس: [docs/phase-04/step-06/COMPATIBILITY-MATRIX.md](docs/phase-04/step-06/COMPATIBILITY-MATRIX.md).
