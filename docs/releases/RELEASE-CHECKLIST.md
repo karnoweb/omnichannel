@@ -10,10 +10,10 @@
 | 4 | مستند فارسی درایورهای متاثر | — | `docs/providers/` | تغییر رفتار کانال |
 | 5 | `docs/releases/<version>.md` | — | پوشه releases | هر انتشار |
 | 6 | تطابق ماتریس قابلیت با کد | — | step-03 | ادعای قابلیت جدید |
-| 7 | PHPUnit `--exclude-group redis` | — | خروجی ترمینال | سبز در CI محلی |
+| 7 | PHPUnit `--exclude-group redis` | — | [GitHub Actions CI](../../.github/workflows/ci.yml) job `phpunit` | سبز در CI |
 | 8 | تست ارتقا از نسخه قبل | — | Upgrade* tests | اگر migration/config |
-| 9 | MySQL/PG migrate (در صورت ادعا) | — | لاگ migrate | فقط اگر در VERIFICATION اعلام شود |
-| 10 | Redis / چند worker | — | Redis group tests | فقط اگر rate limit تولیدی |
+| 9 | MySQL/PG migrate (در صورت ادعا) | — | GHA job `phpunit-mysql` | PG همچنان خارج دامنه |
+| 10 | Redis / چند worker | — | GHA job `redis` | گروه redis |
 | 11 | اعتبارسنجی میزبان | — | host suite | در صورت نیاز محصول |
 | 12 | API زنده | — | محیط staging | اختیاری؛ مجوز |
 | 13 | هم‌خوانی version / tag / CHANGELOG | — | git tag, composer.json | قبل از push |
@@ -21,4 +21,4 @@
 | 15 | مشکلات شناخته‌شده در CHANGELOG | — | Known Limitations | صادقانه |
 | 16 | ثبت تاریخ انتشار واقعی پس از وقوع | — | GitHub/Packagist | نه پیشاپیش |
 
-**تغییر فایل CI در مرحله ۴.۶ انجام نشده است.**
+**CI:** GitHub Actions (فاز ۹)؛ `.gitlab-ci.yml` اختیاری.

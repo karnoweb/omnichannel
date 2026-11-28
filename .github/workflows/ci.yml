@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: zip, sqlite3, pdo_sqlite
+          coverage: none
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+      - name: Platform requirements
+        run: composer check-platform-reqs
+      - name: PHPUnit
+        run: vendor/bin/phpunit --exclude-group redis
+
+  pint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: zip
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: vendor/bin/pint --test
+
+  composer-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer validate --strict --no-check-version
+
+  composer-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: composer audit --locked
+
+  phpunit-mysql:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: omnichannel
+          MYSQL_DATABASE: omnichannel_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -u root --password=omnichannel"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      OMNICHANNEL_TEST_MYSQL_HOST: 127.0.0.1
+      OMNICHANNEL_TEST_MYSQL_PORT: '3306'
+      OMNICHANNEL_TEST_MYSQL_DATABASE: omnichannel_test
+      OMNICHANNEL_TEST_MYSQL_USER: root
+      OMNICHANNEL_TEST_MYSQL_PASSWORD: omnichannel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: zip, pdo_mysql
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - name: Wait for MySQL
+        run: |
+          for i in $(seq 1 30); do
+            php -r "new PDO('mysql:host=127.0.0.1;port=3306;dbname=omnichannel_test', 'root', 'omnichannel');" 2>/dev/null && exit 0
+            sleep 2
+          done
+          exit 1
+      - run: vendor/bin/phpunit --exclude-group redis
+
+  redis:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      OMNICHANNEL_TEST_REDIS_HOST: 127.0.0.1
+      OMNICHANNEL_TEST_REDIS_PORT: '6379'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: zip, redis
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - run: vendor/bin/phpunit --group redis

@@ -11,7 +11,9 @@
 | وضعیت شما | مسیر |
 |-----------|------|
 | نصب تازه | [نصب تازه 13.3.0](#نصب-تازه-1330) |
-| از 13.3.0 | بدون اقدام نسخه‌ای؛ مراقبت عملیاتی |
+| از 13.4.0 | بدون اقدام نسخه‌ای؛ مراقبت عملیاتی |
+| از 13.3.1 | [ارتقا به 13.4.0](#ارتقا-به-1340) |
+| از 13.3.0 | ابتدا 13.3.1 سپس 13.4.0 توصیه می‌شود |
 | از 13.2.0 | [ارتقا به 13.3.0](#ارتقا-به-1330) |
 | از 13.1.0 یا 13.0.0 | ابتدا به 13.2.0 سپس 13.3.0 — **ارتقای مستقیم چندپله تأیید نشده** |
 | مقاوم‌سازی قدیمی | [docs/hardening/UPGRADE-GUIDE.md](docs/hardening/UPGRADE-GUIDE.md) |
@@ -26,6 +28,7 @@
 | 13.2.0 | 13.3.0 | ^8.4.1 / ^13 | بدون breaking اعلامی | کلیدهای 13.3 | 5 migration | catalog job | کاتالوگ | UpgradeFrom130Test پوشش `2026_11_21_*` (فاز ۵.۱) | **مشروط** |
 | 13.1.0 | 13.2.0 | ^8.4.1 / ^13 | — | — | 11-20 | — | — | **تأیید نشده** | مستند تاریخی |
 | 13.1.0 | 13.3.0 | — | — | — | تراکم | — | — | **تأیید نشده** | توصیه: پله‌ای |
+| 13.3.1 | 13.4.0 | ^8.4.1 / ^13 | گسترش catalog/docs | — | بدون migration جدید | همان | همان | 158 تست SQLite + GHA MySQL/Redis | **نامزد انتشار** |
 
 جزئیات ماتریس: [docs/phase-04/step-06/COMPATIBILITY-MATRIX.md](docs/phase-04/step-06/COMPATIBILITY-MATRIX.md).
 
@@ -51,6 +54,20 @@ php artisan migrate
 
 - `catalog_sync.enabled` پیش‌فرض **false** بماند تا یکپارچگی میزبان آماده شود.
 - تست پیشنهادی: `vendor/bin/phpunit --exclude-group redis` در محیط dev.
+
+---
+
+## ارتقا به 13.4.0
+
+از **13.3.1** (یا 13.3.0 پس از migrate کامل):
+
+1. `composer update karnoweb/omnichannel` به `^13.4`
+2. بدون migration اجباری جدید نسبت به 13.3.1
+3. فعال‌سازی `catalog_sync` همچنان opt-in — [docs/phase-06/CATALOG-SYNC-CONTRACT.md](docs/phase-06/CATALOG-SYNC-CONTRACT.md)
+4. میزبان: [docs/phase-07/HOST-INTEGRATION.md](docs/phase-07/HOST-INTEGRATION.md)
+5. تست: `vendor/bin/phpunit --exclude-group redis`
+
+جزئیات: [docs/releases/13.4.0.md](docs/releases/13.4.0.md).
 
 ---
 
@@ -94,7 +111,7 @@ php artisan migrate
 
 ## مستندات نسخه
 
-- [13.2.0](docs/releases/13.2.0.md) — [13.3.0](docs/releases/13.3.0.md)
+- [13.2.0](docs/releases/13.2.0.md) — [13.3.0](docs/releases/13.3.0.md) — [13.4.0](docs/releases/13.4.0.md)
 - شناسه‌های تغییر: [CHANGE-EVIDENCE.md](docs/phase-04/step-06/CHANGE-EVIDENCE.md)
 ## حداقل PHP در تغییرات منتشرنشده
 

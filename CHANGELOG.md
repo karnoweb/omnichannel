@@ -8,17 +8,30 @@
 
 ## Unreleased — تغییرات منتشرنشده
 
-- حداقل PHP مورد نیاز به 8.4.1 افزایش یافت.
+(خالی)
 
-- نهایی‌سازی دسته واتس‌اپ، موفقیت را فقط با شناسهٔ منطبق و شواهد معتبر بدون خطای قلم اعلام می‌کند.
-- آزمون اتصال ناموفق نتیجهٔ خطا برمی‌گرداند و با متغیر تعریف‌نشده متوقف نمی‌شود.
-- `CatalogSyncExecutor` و `CatalogSyncSnapshotApplier`: همگام‌سازی قیمت/موجودی از snapshot میزبان؛ وضعیت `Synced` فقط پس از تأیید provider؛ batch واتس‌اپ → `Unknown`.
-- `CatalogSyncFingerprint`, revision/debounce, `lockForUpdate` در job، بازیابی با فیلتر policy.
-- `CatalogSyncReconciliationService`: همگرایی `Unknown` پس از تأیید batch واتس‌اپ.
-- `BasalamDriver` implements `SupportsMarketplaceTaxonomy`; شمارش catalog در `omnichannel:doctor`.
-- فاز ۷: `docs/phase-07/` — HOST-INTEGRATION، CHECKLIST (G7-01)، PUBLIC-API-FA (G7-02)، HOST-REQUIREMENTS، CUSTOM-DRIVER-GUIDE؛ نمونه registrar میزبان؛ هم‌ترازی UPGRADING با PHP 8.4.1.
-- فاز ۸: job CI `phpunit-mysql`؛ `TestCase` پشتیبانی `OMNICHANNEL_TEST_MYSQL_*`؛ `docs/phase-08/`؛ `OmnichannelDoctorSanitizationTest`.
+---
 
+## [13.4.0] — 2026-11-28
+
+- **وضعیت:** نامزد انتشار MINOR — **بدون** Production Verified.
+- **راهنمای ارتقا:** [UPGRADING.md](UPGRADING.md) — [docs/releases/13.4.0.md](docs/releases/13.4.0.md)
+
+### افزوده‌شده (Added)
+
+- همگام‌سازی کاتالوگ اجرایی: `CatalogSyncExecutor`, `CatalogSyncFingerprint`, reconciliation واتس‌اپ.
+- مستندات فاز ۶–۹ و CI [GitHub Actions](.github/workflows/ci.yml).
+- راهنمای میزبان فارسی، API عمومی، MySQL test hook در `TestCase`.
+
+### تغییر یافته (Changed)
+
+- حداقل PHP به **8.4.1**.
+- `BasalamDriver`: `SupportsMarketplaceTaxonomy` (mock).
+
+### محدودیت‌های شناخته‌شده
+
+- API live و suite UI میزبان تأیید نشده.
+- PostgreSQL CI و taxonomy live DEFERRED.
 
 ---
 

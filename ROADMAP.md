@@ -148,3 +148,7 @@
 ## فاز ۸ — اعتبارسنجی عملیاتی
 
 CI MySQL، امنیت/صف، batch. live و PG مشروط. [PHASE-CLOSURE](docs/phase-08/PHASE-CLOSURE.md)
+
+## فاز ۹ — انتشار
+
+نسخه **13.4.0**، GitHub Actions، RELEASE-CHECKLIST. بدون Production Verified. [PHASE-CLOSURE](docs/phase-09/PHASE-CLOSURE.md)

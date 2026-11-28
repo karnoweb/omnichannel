@@ -22,6 +22,8 @@
 3. `vendor/bin/phpunit --exclude-group redis`
 4. `vendor/bin/pint --test`
 
+**CI رسمی:** [GitHub Actions](.github/workflows/ci.yml) روی `main` و pull request (PHPUnit، Pint، validate، audit، MySQL، Redis). فایل [`.gitlab-ci.yml`](.gitlab-ci.yml) اختیاری/legacy.
+
 ### MySQL (اختیاری)
 
 همان suite روی MySQL با متغیرهای env (مشابه CI job `phpunit-mysql`):
