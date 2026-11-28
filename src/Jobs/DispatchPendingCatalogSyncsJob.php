@@ -17,6 +17,7 @@ use Karnoweb\Omnichannel\Enums\PublicationStatus;
 use Karnoweb\Omnichannel\Enums\PublicationType;
 use Karnoweb\Omnichannel\Models\CatalogSyncState;
 use Karnoweb\Omnichannel\Models\Publication;
+use Karnoweb\Omnichannel\Services\CatalogSyncExecutor;
 use Karnoweb\Omnichannel\Services\ChannelManager;
 use Karnoweb\Omnichannel\ValueObjects\CatalogListingIdentity;
 
@@ -76,10 +77,14 @@ final class DispatchPendingCatalogSyncsJob implements ShouldQueue
             return;
         }
 
-        // No provider mutation is implemented until its catalog update contract is verified.
-        $state->status = CatalogSyncStatus::Failed;
-        $state->attempts++;
-        $state->last_error = 'Provider catalog sync is not implemented.';
+        if (! in_array($state->status, [CatalogSyncStatus::Pending, CatalogSyncStatus::Failed, CatalogSyncStatus::Dispatching], true)) {
+            return;
+        }
+
+        $state->status = CatalogSyncStatus::Dispatching;
+        $state->last_dispatched_at = now();
         $state->save();
+
+        app(CatalogSyncExecutor::class)->sync($state->fresh(), $publication->fresh(['connection.channel']), $driver);
     }
 }

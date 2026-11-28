@@ -11,6 +11,7 @@ final class CatalogSyncAdapter implements CatalogSyncTriggerContract
 {
     public function recordChange(Publication $publication, array $snapshot): void
     {
-        // Forward host price/stock snapshots into Omnichannel when catalog sync is enabled.
+        app(\Karnoweb\Omnichannel\Services\CatalogSyncService::class)
+            ->recordProductChange($publication, $snapshot);
     }
 }

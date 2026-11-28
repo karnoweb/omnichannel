@@ -72,13 +72,14 @@ final class CatalogSyncDisabledTest extends TestCase
     public function test_enabled_dispatch_never_marks_sync_success_without_provider_confirmation(): void
     {
         config()->set('omnichannel.catalog_sync.enabled', true);
+        config()->set('omnichannel.channels.basalam.base_url', 'https://basalam.test');
         Queue::fake();
         Http::preventStrayRequests();
         config()->set('omnichannel.drivers.basalam', BasalamDriver::class);
         $channel = Channel::query()->create(['name' => 'Basalam', 'slug' => 'basalam-pending', 'driver' => 'basalam']);
         $connection = ChannelConnection::query()->create([
             'branch_id' => 1, 'channel_id' => $channel->id, 'name' => 'Shop', 'status' => ConnectionStatus::Active,
-            'credentials' => [], 'status' => 'active', 'metadata' => ['catalog_sync_enabled' => true],
+            'credentials' => ['access_token' => 'sample-token'], 'metadata' => ['catalog_sync_enabled' => true],
         ]);
         $publication = Publication::query()->create([
             'branch_id' => 1, 'source_type' => PublicationSourceType::Product, 'product_id' => 'sku',
@@ -90,7 +91,7 @@ final class CatalogSyncDisabledTest extends TestCase
         $state = CatalogSyncState::query()->create([
             'branch_id' => 1, 'publication_id' => $publication->id,
             'listing_identity' => $identity->key(), 'status' => CatalogSyncStatus::Pending,
-            'metadata' => ['desired_snapshot' => ['price' => 1000, 'stock' => 5]],
+            'metadata' => [],
         ]);
 
         $job = new DispatchPendingCatalogSyncsJob($state->id);
@@ -98,7 +99,26 @@ final class CatalogSyncDisabledTest extends TestCase
 
         self::assertSame(CatalogSyncStatus::Failed, $state->fresh()->status);
         self::assertNull($state->fresh()->last_synced_at);
-        self::assertStringContainsString('not implemented', $state->fresh()->last_error);
+        self::assertStringContainsString('snapshot', strtolower($state->fresh()->last_error ?? ''));
         Http::assertNothingSent();
+
+        $state->forceFill(['metadata' => ['desired_snapshot' => ['price' => 1000, 'stock' => 5]]])->save();
+
+        $publication->forceFill([
+            'content' => [
+                'title' => 'Title',
+                'caption' => 'Caption',
+                'media' => [['type' => 'image', 'url' => 'https://assets.test/p.jpg']],
+                'extra' => ['price' => 1000, 'stock' => 5],
+            ],
+        ])->save();
+        Http::fake(['https://basalam.test/v1/products/listing-1' => Http::response(['id' => 'listing-1'])]);
+        $state->forceFill(['status' => CatalogSyncStatus::Pending, 'last_error' => null])->save();
+
+        $job = new DispatchPendingCatalogSyncsJob($state->id);
+        $job->handle(app(ChannelManager::class));
+
+        self::assertSame(CatalogSyncStatus::Synced, $state->fresh()->status);
+        self::assertNotNull($state->fresh()->last_synced_at);
     }
 }
