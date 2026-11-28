@@ -21,7 +21,6 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
 
 final class PublicationBatchCreationTest extends TestCase
 {
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('h', 32)));

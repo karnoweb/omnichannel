@@ -18,7 +18,6 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
 
 final class FreeFormPublicationTest extends TestCase
 {
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('a', 32)));

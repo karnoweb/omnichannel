@@ -19,7 +19,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class InstagramDriverOperationsTest extends TestCase
 {
-
     private const API = 'https://instagram.test/v26.0';
 
     protected function defineEnvironment($app): void

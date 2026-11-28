@@ -19,7 +19,6 @@ use RuntimeException;
 
 final class PublicationBatchValidationTest extends TestCase
 {
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('j', 32)));

@@ -14,7 +14,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class PublicationMediaUploadTest extends TestCase
 {
-
     protected function defineDatabaseMigrations(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations_squashed');

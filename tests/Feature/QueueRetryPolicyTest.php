@@ -18,7 +18,6 @@ use ReflectionMethod;
 
 final class QueueRetryPolicyTest extends TestCase
 {
-
     protected function tearDown(): void
     {
         CarbonImmutable::setTestNow();

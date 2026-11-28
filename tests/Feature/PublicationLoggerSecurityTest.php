@@ -15,7 +15,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class PublicationLoggerSecurityTest extends TestCase
 {
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('omnichannel.general.prefix', 'omc_');

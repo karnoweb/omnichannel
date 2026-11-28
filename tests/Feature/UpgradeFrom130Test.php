@@ -13,7 +13,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class UpgradeFrom130Test extends TestCase
 {
-
     private const MIGRATION_DIR = __DIR__.'/../../database/migrations_squashed';
 
     protected function defineDatabaseMigrations(): void

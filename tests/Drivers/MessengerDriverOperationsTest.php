@@ -15,7 +15,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 final class MessengerDriverOperationsTest extends TestCase
 {
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('app.key', 'base64:'.base64_encode(str_repeat('a', 32)));

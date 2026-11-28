@@ -11,6 +11,7 @@ use Orchestra\Testbench\TestCase as OrchestraTestCase;
 abstract class TestCase extends OrchestraTestCase
 {
     use OmnichannelRefreshDatabase;
+
     protected function getPackageProviders($app): array
     {
         return [OmnichannelServiceProvider::class];

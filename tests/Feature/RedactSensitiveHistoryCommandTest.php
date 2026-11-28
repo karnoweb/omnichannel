@@ -13,7 +13,6 @@ use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class RedactSensitiveHistoryCommandTest extends TestCase
 {
-
     protected function defineEnvironment($app): void
     {
         $app['config']->set('omnichannel.general.prefix', 'omc_');
