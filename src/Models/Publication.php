@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Karnoweb\Omnichannel\Casts\PublicationContentCast;
+use Karnoweb\Omnichannel\Casts\PublicationMetadataCast;
 use Karnoweb\Omnichannel\Database\Factories\PublicationFactory;
 use Karnoweb\Omnichannel\Enums\FailureClass;
 use Karnoweb\Omnichannel\Enums\PublicationSourceType;
@@ -679,8 +681,8 @@ class Publication extends BaseModel
             'source_type' => PublicationSourceType::class,
             'type' => PublicationType::class,
             'status' => PublicationStatus::class,
-            'content' => 'array',
-            'metadata' => 'array',
+            'content' => PublicationContentCast::class,
+            'metadata' => PublicationMetadataCast::class,
             'failure_class' => FailureClass::class,
             'attempts' => 'integer',
             'content_version' => 'integer',

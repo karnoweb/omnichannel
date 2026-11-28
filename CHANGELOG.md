@@ -8,7 +8,8 @@
 
 ## Unreleased — تغییرات منتشرنشده
 
-(خالی)
+- `PublicationContentCast` / `PublicationMetadataCast`: ترتیب پایدار JSON روی MySQL.
+- به‌روزرسانی Symfony (audit امنیتی CI).
 
 ---
 
