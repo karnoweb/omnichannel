@@ -8,8 +8,23 @@
 
 ## Unreleased — تغییرات منتشرنشده
 
-- `PublicationContentCast` / `PublicationMetadataCast`: ترتیب پایدار JSON روی MySQL.
-- به‌روزرسانی Symfony (audit امنیتی CI).
+_(خالی)_
+
+---
+
+## [13.4.1] — 2026-11-28
+
+- **وضعیت:** PATCH — بدون migration جدید؛ بدون breaking اعلامی.
+- **راهنمای ارتقا:** [UPGRADING.md](UPGRADING.md) — [docs/releases/13.4.1.md](docs/releases/13.4.1.md)
+
+### اصلاح (Fixed)
+
+- `PublicationContentCast` / `PublicationMetadataCast`: ترتیب پایدار کلید JSON روی MySQL (هم‌ترازی با SQLite در تست‌ها).
+- پایهٔ تست: یکپارچه‌سازی `RefreshDatabase` روی `TestCase`؛ رفع شکست job `phpunit-mysql` در CI (migrate دوباره / legacy SQLite).
+
+### تغییر یافته (Changed)
+
+- به‌روزرسانی وابستگی‌های Symfony (`composer.lock`) برای عبور `composer audit` در CI.
 
 ---
 

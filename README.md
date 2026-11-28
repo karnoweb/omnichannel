@@ -1,6 +1,6 @@
 # karnoweb/omnichannel
 
-Laravel package for multi-channel publication (9 drivers). Version **13.4.0** (catalog sync execution, host integration docs, GitHub CI).
+Laravel package for multi-channel publication (9 drivers). Version **13.4.1** (CI-stable patch on 13.4.0 line; catalog sync, host docs, GitHub Actions).
 
 ## Requirements
 

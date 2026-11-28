@@ -16,7 +16,7 @@
 | 10 | Redis | PASS | GHA `redis` |
 | 11 | میزبان | N/A | خارج پکیج |
 | 12 | API زنده | DEFERRED | فاز ۸ |
-| 13 | version/tag | PASS | `v13.4.0` |
+| 13 | version/tag | PASS | `v13.4.0`؛ پچ CI → `v13.4.1` |
 | 14 | rollback | PASS | UPGRADING + MIGRATION-REVIEW ارجاع |
 | 15 | Known limitations | PASS | 13.4.0.md |
 | 16 | تاریخ انتشار | PASS | پس از tag |

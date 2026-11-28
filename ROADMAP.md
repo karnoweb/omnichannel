@@ -151,4 +151,4 @@ CI MySQL، امنیت/صف، batch. live و PG مشروط. [PHASE-CLOSURE](docs/
 
 ## فاز ۹ — انتشار
 
-نسخه **13.4.0**، GitHub Actions، RELEASE-CHECKLIST. بدون Production Verified. [PHASE-CLOSURE](docs/phase-09/PHASE-CLOSURE.md)
+نسخه **13.4.1** (خط 13.4.x)، GitHub Actions سبز، RELEASE-CHECKLIST. بدون Production Verified. [PHASE-CLOSURE](docs/phase-09/PHASE-CLOSURE.md)

@@ -20,5 +20,6 @@
 | 13.3.0 | [13.3.0.md](13.3.0.md) | CHANGELOG + فاز ۰۳ |
 | 13.3.1 | [13.3.1.md](13.3.1.md) | PATCH تست/مستند |
 | 13.4.0 | [13.4.0.md](13.4.0.md) | فاز ۶–۹ + GHA CI |
+| 13.4.1 | [13.4.1.md](13.4.1.md) | PATCH MySQL cast + CI سبز |
 
 تحلیل مرحله ۴.۶: [../phase-04/step-06/README.md](../phase-04/step-06/README.md)
