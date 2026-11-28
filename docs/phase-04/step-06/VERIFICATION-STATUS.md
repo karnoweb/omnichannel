@@ -4,7 +4,7 @@
 
 | سطح | معنی در این سند |
 |------|------------------|
-| اعلام سازگاری | `composer.json` (PHP ^8.3, illuminate ^13) |
+| اعلام سازگاری | `composer.json` (PHP ^8.4.1, illuminate ^13) |
 | بازبینی سورس | ممیزی ۴.۱ / migrations موجود |
 | تست ایزوله SQLite | PHPUnit با `--exclude-group redis` |
 | تست ارتقا | `UpgradeFrom130Test` و مشابه |
@@ -16,6 +16,7 @@
 |------|----------------------|------------------|--------------------|-------------|------------|
 | 13.2.0 | **مستند:** 79 تست OK (فاز ۰۲) | Integration Required (فاز ۰۲) | Live/Integration Required | Pending (baseline) | Live API Required |
 | 13.3.0 | **مستند:** 102 تست OK (فاز ۰۳) | **مستند ۴.۱:** 102 OK؛ engine دیگر اجرا نشده | گروه redis حذف‌شده از پیش‌فرض | OMC-AUD-012 | OMC-AUD / step-01 |
+| 13.3.1+ (فاز ۸) | **۱۵۸** تست SQLite محلی (بدون redis) | job GitLab `phpunit-mysql` + [MIGRATION-VALIDATION.md](../../phase-08/MIGRATION-VALIDATION.md) | CI `redis-integration` + concurrency tests | ر. فاز ۷ | **DEFERRED** live |
 
 ## اجرای تست در مرحله ۴.۶
 

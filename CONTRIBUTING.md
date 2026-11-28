@@ -22,6 +22,20 @@
 3. `vendor/bin/phpunit --exclude-group redis`
 4. `vendor/bin/pint --test`
 
+### MySQL (اختیاری)
+
+همان suite روی MySQL با متغیرهای env (مشابه CI job `phpunit-mysql`):
+
+```bash
+export OMNICHANNEL_TEST_MYSQL_HOST=127.0.0.1
+export OMNICHANNEL_TEST_MYSQL_DATABASE=omnichannel_test
+export OMNICHANNEL_TEST_MYSQL_USER=root
+export OMNICHANNEL_TEST_MYSQL_PASSWORD=secret
+vendor/bin/phpunit --exclude-group redis
+```
+
+جزئیات: [MIGRATION-VALIDATION.md](docs/phase-08/MIGRATION-VALIDATION.md).
+
 راهنمای کامل: [DEVELOPMENT-SETUP.md](docs/phase-04/step-08/DEVELOPMENT-SETUP.md).
 
 ## انتخاب کار

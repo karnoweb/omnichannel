@@ -34,6 +34,32 @@ composer-audit:
   script:
     - composer audit --locked
 
+phpunit-mysql:
+  stage: test
+  services:
+    - name: mysql:8.0
+      alias: mysql
+  variables:
+    MYSQL_ROOT_PASSWORD: omnichannel
+    MYSQL_DATABASE: omnichannel_test
+    OMNICHANNEL_TEST_MYSQL_HOST: mysql
+    OMNICHANNEL_TEST_MYSQL_USER: root
+    OMNICHANNEL_TEST_MYSQL_PASSWORD: omnichannel
+    OMNICHANNEL_TEST_MYSQL_DATABASE: omnichannel_test
+  before_script:
+    - apt-get update -yqq && apt-get install -yqq git unzip libzip-dev default-libmysqlclient-dev
+    - docker-php-ext-install zip pdo_mysql
+    - curl -fsSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer install --no-interaction --prefer-dist
+    - composer check-platform-reqs
+    - |
+      for i in $(seq 1 30); do
+        php -r "new PDO('mysql:host=mysql;dbname=omnichannel_test', 'root', 'omnichannel');" 2>/dev/null && break
+        sleep 2
+      done
+  script:
+    - vendor/bin/phpunit --exclude-group redis
+
 redis-integration:
   stage: test
   services:

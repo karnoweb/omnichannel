@@ -1,0 +1,13 @@
+# فاز ۸ — اعتبارسنجی عملیاتی
+
+| سند | کاربرد |
+|-----|--------|
+| [EXECUTION-PLAN.md](EXECUTION-PLAN.md) | گام‌های اجرایی |
+| [MIGRATION-VALIDATION.md](MIGRATION-VALIDATION.md) | WP-08-02 |
+| [SECURITY-VALIDATION.md](SECURITY-VALIDATION.md) | WP-08-03 |
+| [QUEUE-AND-CONCURRENCY.md](QUEUE-AND-CONCURRENCY.md) | WP-08-04 |
+| [BATCH-RESILIENCE.md](BATCH-RESILIENCE.md) | WP-08-06 |
+| [DECISIONS-AND-BLOCKERS.md](DECISIONS-AND-BLOCKERS.md) | live / PG |
+| [PHASE-CLOSURE.md](PHASE-CLOSURE.md) | پذیرش |
+
+ورود: [../phase-07/PHASE-08-ENTRY.md](../phase-07/PHASE-08-ENTRY.md).

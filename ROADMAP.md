@@ -144,3 +144,7 @@
 ## فاز ۷ — میزبان و DX
 
 راهنمای یکپارچگی، API فارسی، registrar Reference، درایور سفارشی. [PHASE-CLOSURE](docs/phase-07/PHASE-CLOSURE.md)
+
+## فاز ۸ — اعتبارسنجی عملیاتی
+
+CI MySQL، امنیت/صف، batch. live و PG مشروط. [PHASE-CLOSURE](docs/phase-08/PHASE-CLOSURE.md)
