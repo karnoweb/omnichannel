@@ -19,8 +19,11 @@ final class MarketplaceTaxonomyService
             return 0;
         }
         $rows = $driver->fetchExternalCategories($connection);
-        if ($dryRun || $rows === []) {
+        if ($dryRun) {
             return count($rows);
+        }
+        if ($rows === []) {
+            return 0;
         }
         $count = 0;
         foreach ($rows as $row) {

@@ -19,6 +19,7 @@ use Karnoweb\Omnichannel\Models\Channel;
 use Karnoweb\Omnichannel\Models\ChannelConnection;
 use Karnoweb\Omnichannel\Models\Publication;
 use Karnoweb\Omnichannel\Services\CatalogSyncDispatcher;
+use Karnoweb\Omnichannel\Services\CatalogSyncPolicy;
 use Karnoweb\Omnichannel\Services\ChannelManager;
 use Karnoweb\Omnichannel\Tests\TestCase;
 use Karnoweb\Omnichannel\ValueObjects\CatalogListingIdentity;
@@ -95,7 +96,7 @@ final class CatalogSyncDisabledTest extends TestCase
         ]);
 
         $job = new DispatchPendingCatalogSyncsJob($state->id);
-        $job->handle(app(ChannelManager::class));
+        $job->handle(app(ChannelManager::class), app(CatalogSyncPolicy::class));
 
         self::assertSame(CatalogSyncStatus::Failed, $state->fresh()->status);
         self::assertNull($state->fresh()->last_synced_at);
@@ -116,7 +117,7 @@ final class CatalogSyncDisabledTest extends TestCase
         $state->forceFill(['status' => CatalogSyncStatus::Pending, 'last_error' => null])->save();
 
         $job = new DispatchPendingCatalogSyncsJob($state->id);
-        $job->handle(app(ChannelManager::class));
+        $job->handle(app(ChannelManager::class), app(CatalogSyncPolicy::class));
 
         self::assertSame(CatalogSyncStatus::Synced, $state->fresh()->status);
         self::assertNotNull($state->fresh()->last_synced_at);

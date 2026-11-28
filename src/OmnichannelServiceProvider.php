@@ -29,6 +29,7 @@ use Karnoweb\Omnichannel\Services\ArrayProductRepository;
 use Karnoweb\Omnichannel\Services\CatalogSyncDispatcher;
 use Karnoweb\Omnichannel\Services\CatalogSyncExecutor;
 use Karnoweb\Omnichannel\Services\CatalogSyncPolicy;
+use Karnoweb\Omnichannel\Services\CatalogSyncReconciliationService;
 use Karnoweb\Omnichannel\Services\CatalogSyncRecoveryService;
 use Karnoweb\Omnichannel\Services\CatalogSyncService;
 use Karnoweb\Omnichannel\Services\CatalogSyncSnapshotApplier;
@@ -86,6 +87,7 @@ class OmnichannelServiceProvider extends ServiceProvider
         $this->app->singleton(CatalogSyncSnapshotApplier::class);
         $this->app->singleton(CatalogSyncExecutor::class);
         $this->app->singleton(CatalogSyncService::class);
+        $this->app->singleton(CatalogSyncReconciliationService::class);
         $this->app->singleton(CatalogSyncRecoveryService::class);
         $this->app->singletonIf(CatalogSyncTriggerContract::class, DefaultCatalogSyncTrigger::class);
 

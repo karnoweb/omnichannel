@@ -48,4 +48,29 @@ final class CategoryMappingTest extends TestCase
         $resolved = app(CategoryMappingResolver::class)->resolveExternalCategoryId('cat-electronics', $connection, 3);
         self::assertSame(501, $resolved);
     }
+
+    public function test_mapping_does_not_resolve_for_wrong_branch(): void
+    {
+        $channel = Channel::query()->create(['name' => 'Basalam', 'slug' => 'basalam-b2', 'driver' => 'basalam']);
+        $connection = ChannelConnection::query()->create(['branch_id' => 3, 'channel_id' => $channel->id, 'name' => 'Shop', 'credentials' => [], 'status' => 'active']);
+        $external = ExternalCategory::query()->create([
+            'channel_id' => $channel->id,
+            'scope_key' => 'global',
+            'external_id' => '501',
+            'name' => 'Electronics',
+            'is_leaf' => true,
+            'is_active' => true,
+        ]);
+        CategoryMapping::query()->create([
+            'branch_id' => 3,
+            'channel_connection_id' => $connection->id,
+            'internal_category_id' => 'cat-electronics',
+            'external_category_id' => $external->id,
+            'is_active' => true,
+        ]);
+
+        $resolved = app(CategoryMappingResolver::class)->resolveExternalCategoryId('cat-electronics', $connection, 99);
+
+        self::assertNull($resolved);
+    }
 }

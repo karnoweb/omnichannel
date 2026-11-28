@@ -6,6 +6,7 @@ namespace Karnoweb\Omnichannel\Channels\Basalam;
 
 use Karnoweb\Omnichannel\Contracts\ChannelDriver;
 use Karnoweb\Omnichannel\Contracts\DeactivatableChannelDriver;
+use Karnoweb\Omnichannel\Contracts\SupportsMarketplaceTaxonomy;
 use Karnoweb\Omnichannel\Enums\Capability;
 use Karnoweb\Omnichannel\Enums\FailureClass;
 use Karnoweb\Omnichannel\Enums\PublicationType;
@@ -19,7 +20,7 @@ use Karnoweb\Omnichannel\Results\ValidationResult;
 use Karnoweb\Omnichannel\ValueObjects\ChannelCapabilities;
 use Karnoweb\Omnichannel\ValueObjects\MediaItem;
 
-final class BasalamDriver implements ChannelDriver, DeactivatableChannelDriver
+final class BasalamDriver implements ChannelDriver, DeactivatableChannelDriver, SupportsMarketplaceTaxonomy
 {
     public function __construct(
         private readonly BasalamApiClient $api,
@@ -289,6 +290,49 @@ final class BasalamDriver implements ChannelDriver, DeactivatableChannelDriver
         return DeleteResult::unsupported(
             (string) $this->capabilities()->reasonFor(Capability::Delete)
         );
+    }
+
+    public function fetchExternalCategories(ChannelConnection $connection, ?string $scopeKey = null): array
+    {
+        $token = $this->token($connection);
+        if ($token === null) {
+            return [];
+        }
+
+        $response = $this->api->getCategories($token);
+        if ($response->failed()) {
+            return [];
+        }
+
+        $items = $response->get('data');
+        if (! is_array($items)) {
+            $items = is_array($response->data) ? $response->data : [];
+        }
+
+        $rows = [];
+        foreach ($items as $item) {
+            if (! is_array($item)) {
+                continue;
+            }
+            $id = $item['id'] ?? null;
+            if (! is_scalar($id) || (string) $id === '') {
+                continue;
+            }
+            $rows[] = [
+                'scope_key' => $scopeKey ?? 'global',
+                'external_id' => (string) $id,
+                'external_parent_id' => isset($item['parent_id']) && is_scalar($item['parent_id'])
+                    ? (string) $item['parent_id']
+                    : null,
+                'name' => (string) ($item['title'] ?? $item['name'] ?? 'Unknown'),
+                'path' => isset($item['path']) && is_string($item['path']) ? $item['path'] : null,
+                'is_leaf' => (bool) ($item['is_leaf'] ?? ! isset($item['children'])),
+                'is_active' => (bool) ($item['is_active'] ?? true),
+                'metadata' => ['source' => 'basalam.categories'],
+            ];
+        }
+
+        return $rows;
     }
 
     public function deactivate(Publication $publication): PublishResult

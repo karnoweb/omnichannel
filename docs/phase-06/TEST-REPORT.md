@@ -1,9 +1,10 @@
-# نتایج آزمون فاز ۶ (شروع)
+# نتایج آزمون فاز ۶
+
+PHP 8.4.22، PHPUnit 13.4.7.
 
 | فرمان | نتیجه |
 |---|---|
-| `vendor/bin/phpunit --exclude-group redis` | ۱۴۷ تست، ۰ شکست |
-| `tests/Feature/CatalogSyncExecutionTest.php` | ۳ تست |
-| `tests/Feature/CatalogSyncDisabledTest.php` | ۲ تست |
+| `vendor/bin/phpunit --exclude-group redis` | ۱۵۵ تست، ۰ شکست |
+| گروه CatalogSync* + MarketplaceTaxonomyBasalamTest | شامل شده در مجموعه |
 
-Redis و audit همان شواهد فاز ۵.۹.
+Redis: همان روش فاز ۵.۹ با `OMNICHANNEL_TEST_REDIS_HOST`.

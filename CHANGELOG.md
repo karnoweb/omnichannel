@@ -13,6 +13,9 @@
 - نهایی‌سازی دسته واتس‌اپ، موفقیت را فقط با شناسهٔ منطبق و شواهد معتبر بدون خطای قلم اعلام می‌کند.
 - آزمون اتصال ناموفق نتیجهٔ خطا برمی‌گرداند و با متغیر تعریف‌نشده متوقف نمی‌شود.
 - `CatalogSyncExecutor` و `CatalogSyncSnapshotApplier`: همگام‌سازی قیمت/موجودی از snapshot میزبان؛ وضعیت `Synced` فقط پس از تأیید provider؛ batch واتس‌اپ → `Unknown`.
+- `CatalogSyncFingerprint`, revision/debounce, `lockForUpdate` در job، بازیابی با فیلتر policy.
+- `CatalogSyncReconciliationService`: همگرایی `Unknown` پس از تأیید batch واتس‌اپ.
+- `BasalamDriver` implements `SupportsMarketplaceTaxonomy`; شمارش catalog در `omnichannel:doctor`.
 
 
 ---

@@ -1,11 +1,11 @@
-# اجرای فاز ۶ (شروع)
-
-مبنای Git پس از فاز ۵.۹. مرحله اول: WP-06-02 اجرای sync قیمت/موجودی با `CatalogSyncExecutor`.
+# اجرای فاز ۶ — تکمیل
 
 | گام | وضعیت |
 |---|---|
-| ۶.۱ ممیزی و تست بازتولید | PASS برای عدم Synced کاذب |
-| ۶.۴ اجرای sync | PASS برای Basalam در محیط fake؛ WA → Unknown |
-| ۶.۲ Basalam status | IN_PROGRESS |
-| ۶.۳ taxonomy live | BLOCKED تا مجوز staging |
-| ۶.۵–۶.۷ پذیرش کامل | IN_PROGRESS |
+| ۶.۱ ممیزی و revision | PASS |
+| ۶.۲ WP-06-01 باسلام | PASS mock |
+| ۶.۳ WP-06-03 taxonomy | PASS mock؛ live DEFERRED |
+| ۶.۴ سخت‌سازی sync | PASS |
+| ۶.۵ WP-06-04 WA | PASS |
+| ۶.۶ بازیابی و doctor | PASS |
+| ۶.۷ پذیرش | PASS مشروط live taxonomy |

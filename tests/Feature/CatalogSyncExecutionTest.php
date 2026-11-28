@@ -17,6 +17,7 @@ use Karnoweb\Omnichannel\Models\CatalogSyncState;
 use Karnoweb\Omnichannel\Models\Channel;
 use Karnoweb\Omnichannel\Models\ChannelConnection;
 use Karnoweb\Omnichannel\Models\Publication;
+use Karnoweb\Omnichannel\Services\CatalogSyncPolicy;
 use Karnoweb\Omnichannel\Services\ChannelManager;
 use Karnoweb\Omnichannel\Tests\TestCase;
 use Karnoweb\Omnichannel\ValueObjects\CatalogListingIdentity;
@@ -50,7 +51,7 @@ final class CatalogSyncExecutionTest extends TestCase
         [$state, $publication] = $this->basalamPublication('listing-basalam');
 
         $job = new DispatchPendingCatalogSyncsJob($state->id);
-        $job->handle(app(ChannelManager::class));
+        $job->handle(app(ChannelManager::class), app(CatalogSyncPolicy::class));
 
         $state->refresh();
         self::assertSame(CatalogSyncStatus::Synced, $state->status);
@@ -82,7 +83,7 @@ final class CatalogSyncExecutionTest extends TestCase
         [$state] = $this->basalamPublication('listing-fail');
 
         $job = new DispatchPendingCatalogSyncsJob($state->id);
-        $job->handle(app(ChannelManager::class));
+        $job->handle(app(ChannelManager::class), app(CatalogSyncPolicy::class));
 
         $state->refresh();
         self::assertSame(CatalogSyncStatus::Failed, $state->status);
@@ -138,7 +139,7 @@ final class CatalogSyncExecutionTest extends TestCase
         ]);
 
         $job = new DispatchPendingCatalogSyncsJob($state->id);
-        $job->handle(app(ChannelManager::class));
+        $job->handle(app(ChannelManager::class), app(CatalogSyncPolicy::class));
 
         $state->refresh();
         self::assertSame(CatalogSyncStatus::Unknown, $state->status);

@@ -46,6 +46,7 @@ final class CatalogSyncExecutor
         if ($result->successful) {
             $metadata = (array) $state->metadata;
             $metadata['applied_snapshot'] = $snapshot;
+            $metadata['applied_revision'] = data_get($state->metadata, 'desired_revision');
             $state->forceFill([
                 'status' => CatalogSyncStatus::Synced,
                 'last_synced_at' => now(),
@@ -83,6 +84,12 @@ final class CatalogSyncExecutor
 
     private function revisionFingerprint(CatalogSyncState $state): string
     {
+        $revision = data_get($state->metadata, 'desired_revision');
+
+        if (is_string($revision) && $revision !== '') {
+            return $revision;
+        }
+
         return implode('|', [
             (string) ($state->price_hash ?? 'null'),
             (string) ($state->stock_hash ?? 'null'),

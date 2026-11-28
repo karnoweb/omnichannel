@@ -21,6 +21,13 @@ final class CatalogSyncDispatcher
         $state->status = CatalogSyncStatus::Pending;
         $state->last_dispatched_at = now();
         $state->save();
-        DispatchPendingCatalogSyncsJob::dispatch($state->getKey());
+
+        $delay = max(0, (int) config('omnichannel.catalog_sync.debounce_seconds', 30));
+        $revision = data_get($state->metadata, 'desired_revision');
+        $claimedRevision = is_string($revision) ? $revision : null;
+        $pending = DispatchPendingCatalogSyncsJob::dispatch($state->getKey(), $claimedRevision);
+        if ($delay > 0) {
+            $pending->delay(now()->addSeconds($delay));
+        }
     }
 }

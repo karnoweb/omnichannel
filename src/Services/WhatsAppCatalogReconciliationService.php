@@ -146,6 +146,8 @@ final class WhatsAppCatalogReconciliationService
             );
         }
 
+        app(CatalogSyncReconciliationService::class)->convergeAfterExternalConfirmation($publication);
+
         return new ReconciliationResult(
             ReconciliationResult::ConfirmedSuccess,
             'All inspected batch handles reported completion.',
