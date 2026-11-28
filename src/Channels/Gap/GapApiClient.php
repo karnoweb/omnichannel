@@ -11,7 +11,7 @@ use Karnoweb\Omnichannel\Http\BaseApiClient;
 final class GapApiClient extends BaseApiClient
 {
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendMessage(string $token, array $payload): ApiResponse
     {
@@ -19,7 +19,7 @@ final class GapApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function editMessage(string $token, array $payload): ApiResponse
     {
@@ -27,7 +27,7 @@ final class GapApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function deleteMessage(string $token, array $payload): ApiResponse
     {
@@ -53,7 +53,7 @@ final class GapApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     private function form(string $token, string $method, array $payload): ApiResponse
     {
@@ -67,6 +67,6 @@ final class GapApiClient extends BaseApiClient
 
     private function url(string $method): string
     {
-        return rtrim((string) config('omnichannel.channels.gap.base_url'), '/') . '/' . $method;
+        return rtrim((string) config('omnichannel.channels.gap.base_url'), '/').'/'.$method;
     }
 }

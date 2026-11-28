@@ -19,7 +19,7 @@ trait ResolvesConfiguredModels
      */
     public static function model(string $key): string
     {
-        $class = config(static::configuredModelsRoot() . '.models.' . $key);
+        $class = config(static::configuredModelsRoot().'.models.'.$key);
 
         if (! is_string($class) || $class === '' || ! class_exists($class)) {
             throw new InvalidArgumentException(
@@ -35,7 +35,7 @@ trait ResolvesConfiguredModels
      */
     public static function optionalModel(string $key): ?string
     {
-        $class = config(static::configuredModelsRoot() . '.models.' . $key);
+        $class = config(static::configuredModelsRoot().'.models.'.$key);
 
         return is_string($class) && $class !== '' && class_exists($class) ? $class : null;
     }

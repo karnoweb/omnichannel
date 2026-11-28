@@ -29,8 +29,8 @@ final class CatalogSyncService
             (string) $publication->product_id,
             $publication->external_id,
         );
-        $priceHash = isset($snapshot['price']) ? crc32((string) $snapshot['price']) : null;
-        $stockHash = isset($snapshot['stock']) ? crc32((string) $snapshot['stock']) : null;
+        $priceHash = array_key_exists('price', $snapshot) ? crc32('present:'.(string) $snapshot['price']) : null;
+        $stockHash = array_key_exists('stock', $snapshot) ? crc32('present:'.(string) $snapshot['stock']) : null;
         /** @var CatalogSyncState $state */
         $state = CatalogSyncState::query()->firstOrCreate(
             ['publication_id' => $publication->getKey()],
@@ -38,13 +38,16 @@ final class CatalogSyncService
                 'branch_id' => $publication->branch_id,
                 'listing_identity' => $identity->key(),
                 'status' => CatalogSyncStatus::Idle,
+                'metadata' => ['desired_snapshot' => $snapshot],
             ],
         );
-        if ($state->price_hash === $priceHash && $state->stock_hash === $stockHash) {
+        if ($state->price_hash === $priceHash && $state->stock_hash === $stockHash
+            && data_get($state->metadata, 'desired_snapshot') === $snapshot) {
             return $state;
         }
         $state->price_hash = $priceHash;
         $state->stock_hash = $stockHash;
+        $state->metadata = [...(array) $state->metadata, 'desired_snapshot' => $snapshot];
         $state->status = CatalogSyncStatus::Pending;
         $state->save();
         $this->dispatcher->dispatchPending($state);

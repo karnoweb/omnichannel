@@ -18,6 +18,7 @@ final class ApiRequestRateLimitScope
 
     /**
      * @template T
+     *
      * @param  callable(): T  $callback
      * @return T
      */
@@ -48,6 +49,7 @@ final class ApiRequestRateLimitScope
 
     /**
      * @template T
+     *
      * @param  callable(): T  $callback
      * @return T
      */

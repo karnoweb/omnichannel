@@ -6,6 +6,7 @@ namespace Karnoweb\Omnichannel\Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Enums\FailureClass;
@@ -33,6 +34,27 @@ final class UnknownOutcomeTest extends TestCase
     protected function defineDatabaseMigrations(): void
     {
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations_squashed');
+    }
+
+    public function test_demo_driver_lifecycle_uses_no_external_transport(): void
+    {
+        $this->setBranch(12);
+        [$connection, $publication] = $this->publication([]);
+        $connection->forceFill(['credentials' => ['access_token' => 'sample-token']])->save();
+        Http::preventStrayRequests();
+        Http::fake([]);
+        $driver = app(ChannelManager::class)->driverForPublication($publication);
+
+        self::assertTrue($driver->testConnection($connection)->successful);
+        self::assertTrue($driver->validate($publication)->passes());
+        $published = $driver->publish($publication);
+        self::assertTrue($published->successful);
+        self::assertNotNull($published->externalId);
+
+        $publication->forceFill(['external_id' => $published->externalId])->save();
+        self::assertSame($published->externalId, $driver->update($publication)->externalId);
+        self::assertTrue($driver->delete($publication)->successful);
+        Http::assertNothingSent();
     }
 
     public function test_uncertain_publish_is_persisted_and_manual_retry_requires_confirmation(): void

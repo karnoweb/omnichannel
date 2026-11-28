@@ -11,7 +11,7 @@ enum MediaType: string
 
     public function label(): string
     {
-        return trans('omnichannel::omnichannel.media.' . $this->value);
+        return trans('omnichannel::omnichannel.media.'.$this->value);
     }
 
     public function requiredCapability(): Capability

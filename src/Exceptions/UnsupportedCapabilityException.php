@@ -16,6 +16,6 @@ final class UnsupportedCapabilityException extends DomainException
     ) {
         $message = "Driver [{$driver}] does not support capability [{$capability->value}].";
 
-        parent::__construct($reason !== null ? $message . ' ' . $reason : $message);
+        parent::__construct($reason !== null ? $message.' '.$reason : $message);
     }
 }

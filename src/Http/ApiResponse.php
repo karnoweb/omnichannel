@@ -12,8 +12,8 @@ use Throwable;
 final readonly class ApiResponse
 {
     /**
-     * @param array<string, mixed>        $data
-     * @param array<string, list<string>> $headers
+     * @param  array<string, mixed>  $data
+     * @param  array<string, list<string>>  $headers
      */
     private function __construct(
         public bool $successful,

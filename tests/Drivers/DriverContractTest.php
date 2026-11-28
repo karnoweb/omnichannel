@@ -4,14 +4,46 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Drivers;
 
+use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Contracts\ChannelDriver;
 use Karnoweb\Omnichannel\Contracts\DeactivatableChannelDriver;
 use Karnoweb\Omnichannel\Enums\Capability;
+use Karnoweb\Omnichannel\Enums\PublicationType;
+use Karnoweb\Omnichannel\Models\ChannelConnection;
+use Karnoweb\Omnichannel\Models\Publication;
 use Karnoweb\Omnichannel\Services\ChannelManager;
 use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class DriverContractTest extends TestCase
 {
+    public function test_missing_credentials_and_unsupported_operations_do_not_send_requests(): void
+    {
+        Http::preventStrayRequests();
+        Http::fake([]);
+        $manager = app(ChannelManager::class);
+        $keys = ['demo', 'instagram', 'basalam', 'telegram', 'bale', 'rubika', 'gap', 'eitaa', 'whatsapp'];
+        self::assertSame($keys, array_keys(config('omnichannel.drivers')));
+        foreach ($keys as $key) {
+            $driver = $manager->driver($key);
+            $connection = new ChannelConnection;
+            self::assertFalse($driver->testConnection($connection)->successful, $key);
+
+            $capabilities = $driver->capabilities();
+            $publication = new Publication(['type' => PublicationType::Product, 'content' => []]);
+            $publication->setRelation('connection', $connection);
+            if (! $capabilities->supportsType(PublicationType::Product)) {
+                self::assertTrue($driver->validate($publication)->fails(), $key);
+            }
+            if (! $capabilities->supports(Capability::Update)) {
+                self::assertFalse($driver->update($publication)->successful, $key);
+            }
+            if (! $capabilities->supports(Capability::Delete)) {
+                self::assertFalse($driver->delete($publication)->successful, $key);
+            }
+        }
+        Http::assertNothingSent();
+    }
+
     public function test_all_registered_drivers_expose_capabilities(): void
     {
         $manager = app(ChannelManager::class);

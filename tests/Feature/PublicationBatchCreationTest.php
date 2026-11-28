@@ -10,7 +10,6 @@ use Karnoweb\Omnichannel\Contracts\BranchContextResolverContract;
 use Karnoweb\Omnichannel\Contracts\ProductRepository;
 use Karnoweb\Omnichannel\Data\CreatePublicationBatchData;
 use Karnoweb\Omnichannel\Data\PublicationTargetData;
-use Karnoweb\Omnichannel\Enums\PublicationBatchDispatchMode;
 use Karnoweb\Omnichannel\Enums\PublicationSourceType;
 use Karnoweb\Omnichannel\Enums\PublicationType;
 use Karnoweb\Omnichannel\Models\Channel;

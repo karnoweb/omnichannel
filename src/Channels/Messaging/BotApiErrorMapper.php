@@ -102,7 +102,7 @@ class BotApiErrorMapper
 
         return $description !== ''
             ? $description
-            : 'The channel returned HTTP ' . ($response->status ?? 0) . ' with no description.';
+            : 'The channel returned HTTP '.($response->status ?? 0).' with no description.';
     }
 
     public function retryAfterSeconds(ApiResponse $response): ?int

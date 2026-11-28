@@ -111,7 +111,7 @@ class PublicationFactory extends Factory
         return $this->state(fn (): array => [
             'status' => PublicationStatus::Published,
             'external_id' => (string) fake()->numberBetween(10_000_000, 99_999_999),
-            'external_url' => 'https://example.test/p/' . fake()->lexify('????????'),
+            'external_url' => 'https://example.test/p/'.fake()->lexify('????????'),
             'published_at' => now(),
         ]);
     }

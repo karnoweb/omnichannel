@@ -1,19 +1,48 @@
 stages:
   - test
 
+default:
+  image: php:8.4-cli
+  before_script:
+    - apt-get update -yqq && apt-get install -yqq git unzip libzip-dev sqlite3 libsqlite3-dev
+    - docker-php-ext-install zip pdo_sqlite
+    - curl -fsSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    - composer install --no-interaction --prefer-dist
+    - composer check-platform-reqs
+
 variables:
   COMPOSER_CACHE_DIR: "$CI_PROJECT_DIR/.composer-cache"
 
 phpunit:
   stage: test
-  image: php:8.3-cli
-  before_script:
-    - apt-get update -yqq && apt-get install -yqq git unzip libzip-dev sqlite3
-    - docker-php-ext-install zip pdo_sqlite
-    - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-    - composer install --no-interaction --prefer-dist
   script:
-  - vendor/bin/pint --test
-  - vendor/bin/phpunit --exclude-group redis
-  - composer validate --strict
-  - composer audit || true
+    - vendor/bin/phpunit --exclude-group redis
+
+format:
+  stage: test
+  script:
+    - vendor/bin/pint --test
+
+composer-validate:
+  stage: test
+  script:
+    # The package deliberately retains its explicit version during phase 5.9.
+    - composer validate --strict --no-check-version
+
+composer-audit:
+  stage: test
+  script:
+    - composer audit --locked
+
+redis-integration:
+  stage: test
+  services:
+    - name: redis:7-alpine
+      alias: redis
+  variables:
+    OMNICHANNEL_TEST_REDIS_HOST: redis
+    OMNICHANNEL_TEST_REDIS_PORT: "6379"
+  script:
+    - pecl install redis
+    - docker-php-ext-enable redis
+    - vendor/bin/phpunit --group redis

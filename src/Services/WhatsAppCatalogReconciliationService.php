@@ -45,7 +45,7 @@ final class WhatsAppCatalogReconciliationService
                 continue;
             }
             $handles = $pending['handles'] ?? [];
-            if (! is_array($handles) || $handles === []) {
+            if (! is_array($handles) || ! array_is_list($handles) || $handles === []) {
                 $rows[] = [
                     'operation' => $operationName,
                     'handle' => null,
@@ -58,26 +58,40 @@ final class WhatsAppCatalogReconciliationService
 
             $statuses = [];
             foreach ($handles as $handle) {
-                if (! is_string($handle) || $handle === '') {
+                if (! is_string($handle) || trim($handle) === '') {
+                    $rows[] = [
+                        'operation' => $operationName,
+                        'handle' => null,
+                        'lookup_successful' => false,
+                        'status' => 'invalid_handle',
+                    ];
+
                     continue;
                 }
                 $response = $this->scope->using(
                     $publication->connection,
                     fn () => $this->client->checkBatchRequestStatus((string) $catalogId, $handle, $token),
                 );
-                $batchRow = data_get($response->data, 'data.0', []);
+                $batchRows = $response->get('data');
+                $batchRow = is_array($batchRows) && array_is_list($batchRows) && count($batchRows) === 1
+                    ? $batchRows[0]
+                    : [];
                 $summary = [
                     'handle' => $handle,
                     'checked_at' => now()->toIso8601String(),
                     'lookup_successful' => ! $response->failed(),
+                    'handle_matches' => data_get($batchRow, 'handle') === $handle,
                     'status' => is_array($batchRow) ? ($batchRow['status'] ?? null) : null,
                     'errors_total_count' => is_array($batchRow) ? ($batchRow['errors_total_count'] ?? null) : null,
+                    'errors' => data_get($batchRow, 'errors', []),
+                    'ids_of_invalid_requests' => data_get($batchRow, 'ids_of_invalid_requests', []),
                 ];
                 if ($response->failed()) {
                     $summary['http_error'] = $response->toLogArray();
                 }
-                $statuses[] = $this->redactor->redactAndTrim($summary, 8192, $publication->connection->credentials ?? []);
-                $rows[] = ['operation' => $operationName, ...$summary];
+                $safeSummary = $this->redactor->redactAndTrim($summary, 8192, $publication->connection->credentials ?? []);
+                $statuses[] = $safeSummary;
+                $rows[] = ['operation' => $operationName, ...$safeSummary];
             }
 
             $pending['status_checks'] = $statuses;
@@ -98,22 +112,38 @@ final class WhatsAppCatalogReconciliationService
             return new ReconciliationResult(ReconciliationResult::Pending, 'No pending WhatsApp batches.');
         }
 
-        $allFinished = true;
+        $pending = false;
+        $failed = false;
+        $succeeded = false;
         foreach ($checks as $check) {
             $status = $check['status'] ?? null;
-            if ($status === 'no_handle') {
+            if (($check['lookup_successful'] ?? false) !== true || ($check['handle_matches'] ?? false) !== true) {
+                return new ReconciliationResult(ReconciliationResult::Unknown, 'Batch handle or status evidence is missing.');
+            }
+            if (in_array($status, ['pending', 'in_progress'], true)) {
+                $pending = true;
+
                 continue;
             }
-            if (($check['lookup_successful'] ?? false) !== true) {
-                return new ReconciliationResult(ReconciliationResult::Unknown, 'Batch status lookup failed.');
+            $errorCount = $check['errors_total_count'] ?? null;
+            if (! in_array($status, ['finished', 'completed'], true) || ! is_int($errorCount) || $errorCount < 0
+                || ($errorCount === 0 && (($check['errors'] ?? null) !== [] || ($check['ids_of_invalid_requests'] ?? null) !== []))) {
+                return new ReconciliationResult(ReconciliationResult::Unknown, 'Batch result is incomplete or inconsistent.');
             }
-            if (! in_array($status, ['finished', 'completed'], true)) {
-                $allFinished = false;
-            }
+            $failed = $failed || $errorCount > 0;
+            $succeeded = $succeeded || $errorCount === 0;
         }
 
-        if (! $allFinished) {
+        if ($pending) {
             return new ReconciliationResult(ReconciliationResult::Pending, 'Batch processing still in progress.');
+        }
+
+        if ($failed) {
+            return new ReconciliationResult(
+                $succeeded ? ReconciliationResult::PartialSuccess : ReconciliationResult::ConfirmedFailure,
+                'At least one batch handle reported item errors.',
+                ['checks' => $checks],
+            );
         }
 
         return new ReconciliationResult(

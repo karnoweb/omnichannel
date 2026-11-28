@@ -12,8 +12,8 @@ final class WhatsAppCatalogClient extends BaseApiClient
     public const ITEM_TYPE_PRODUCT = 'PRODUCT_ITEM';
 
     /**
-     * @param 'CREATE'|'UPDATE'|'DELETE' $method
-     * @param array<string, mixed>       $data
+     * @param  'CREATE'|'UPDATE'|'DELETE'  $method
+     * @param  array<string, mixed>  $data
      */
     public function applyItem(
         string $catalogId,
@@ -72,8 +72,8 @@ final class WhatsAppCatalogClient extends BaseApiClient
         $base = rtrim((string) config('omnichannel.channels.whatsapp.graph_url'), '/');
         $version = trim((string) config('omnichannel.channels.whatsapp.api_version'), '/');
 
-        $url = "{$base}/{$version}/" . ltrim($path, '/');
+        $url = "{$base}/{$version}/".ltrim($path, '/');
 
-        return $edge !== null ? $url . '/' . $edge : $url;
+        return $edge !== null ? $url.'/'.$edge : $url;
     }
 }

@@ -13,14 +13,14 @@ use Karnoweb\Omnichannel\Services\PublishingService;
 use Karnoweb\Omnichannel\Support\OmnichannelContext;
 
 /**
- * @method static mixed                    config(string $key, mixed $default = null)
- * @method static ChannelManager           drivers()
- * @method static PublishingService        publishing()
- * @method static PublicationLogger        logger()
- * @method static OmnichannelContext       context()
- * @method static class-string<Model>      model(string $key)
+ * @method static mixed config(string $key, mixed $default = null)
+ * @method static ChannelManager drivers()
+ * @method static PublishingService publishing()
+ * @method static PublicationLogger logger()
+ * @method static OmnichannelContext context()
+ * @method static class-string<Model> model(string $key)
  * @method static class-string<Model>|null optionalModel(string $key)
- * @method static Model                    newModel(string $key)
+ * @method static Model newModel(string $key)
  *
  * @see OmnichannelManager
  */

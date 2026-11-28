@@ -16,7 +16,7 @@ enum PublicationType: string
 
     public function label(): string
     {
-        return trans('omnichannel::omnichannel.type.' . $this->value);
+        return trans('omnichannel::omnichannel.type.'.$this->value);
     }
 
     public function icon(): string

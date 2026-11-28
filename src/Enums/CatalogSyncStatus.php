@@ -12,4 +12,5 @@ enum CatalogSyncStatus: string
     case Synced = 'synced';
     case Failed = 'failed';
     case Disabled = 'disabled';
+    case Unknown = 'unknown';
 }

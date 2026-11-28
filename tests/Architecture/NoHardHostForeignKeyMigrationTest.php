@@ -23,7 +23,7 @@ final class NoHardHostForeignKeyMigrationTest extends TestCase
 
     public function test_migrations_do_not_hard_foreign_key_host_or_cross_domain_tables(): void
     {
-        $migrations = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'migrations_squashed';
+        $migrations = dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations_squashed';
         $files = SourceScanner::phpFiles($migrations);
 
         $this->assertNotSame([], $files, 'Expected squashed migration file.');

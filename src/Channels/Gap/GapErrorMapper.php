@@ -35,7 +35,7 @@ final class GapErrorMapper
             return 'gap.transport';
         }
 
-        return 'gap.http.' . ($response->status ?? 0);
+        return 'gap.http.'.($response->status ?? 0);
     }
 
     public function technicalMessage(ApiResponse $response): string
@@ -47,6 +47,6 @@ final class GapErrorMapper
         return $response->string('error')
             ?? $response->string('message')
             ?? $response->rawBody
-            ?? 'Gap returned HTTP ' . ($response->status ?? 0) . ' with no description.';
+            ?? 'Gap returned HTTP '.($response->status ?? 0).' with no description.';
     }
 }

@@ -7,8 +7,8 @@ namespace Karnoweb\Omnichannel\Results;
 final readonly class ValidationResult
 {
     /**
-     * @param list<array{code: string, message: string, context: array<string, mixed>}> $errors
-     * @param list<array{code: string, message: string, context: array<string, mixed>}> $warnings
+     * @param  list<array{code: string, message: string, context: array<string, mixed>}>  $errors
+     * @param  list<array{code: string, message: string, context: array<string, mixed>}>  $warnings
      */
     private function __construct(
         public array $errors = [],
@@ -26,7 +26,7 @@ final readonly class ValidationResult
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public static function error(string $code, string $message, array $context = []): self
     {
@@ -34,7 +34,7 @@ final readonly class ValidationResult
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function withError(string $code, string $message, array $context = []): self
     {
@@ -45,7 +45,7 @@ final readonly class ValidationResult
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function withWarning(string $code, string $message, array $context = []): self
     {
@@ -56,7 +56,7 @@ final readonly class ValidationResult
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function errorIf(bool $condition, string $code, string $message, array $context = []): self
     {
@@ -64,7 +64,7 @@ final readonly class ValidationResult
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function warnIf(bool $condition, string $code, string $message, array $context = []): self
     {

@@ -28,8 +28,7 @@ final class InstagramCarouselTransformer implements ContentTransformer
     }
 
     /**
-     * @param list<string> $childContainerIds
-     *
+     * @param  list<string>  $childContainerIds
      * @return array<string, mixed>
      */
     public function parentPayload(Publication $publication, array $childContainerIds): array

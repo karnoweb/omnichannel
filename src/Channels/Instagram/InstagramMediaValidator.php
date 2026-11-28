@@ -282,8 +282,8 @@ final class InstagramMediaValidator
                 $ratio < $spec['min_aspect_ratio'] || $ratio > $spec['max_aspect_ratio'],
                 "{$codePrefix}.aspect_ratio",
                 trans('omnichannel::omnichannel.validation.aspect_ratio', [
-                    'min' => (string) $spec['min_aspect_ratio'] . ':1',
-                    'max' => (string) $spec['max_aspect_ratio'] . ':1',
+                    'min' => (string) $spec['min_aspect_ratio'].':1',
+                    'max' => (string) $spec['max_aspect_ratio'].':1',
                 ]),
                 ['ratio' => round($ratio, 3)],
             );
@@ -342,14 +342,14 @@ final class InstagramMediaValidator
     private function humanBytes(int $bytes): string
     {
         return $bytes >= 1048576
-            ? round($bytes / 1048576) . ' MB'
-            : round($bytes / 1024) . ' KB';
+            ? round($bytes / 1048576).' MB'
+            : round($bytes / 1024).' KB';
     }
 
     private function humanDuration(int $seconds): string
     {
         return $seconds >= 60
-            ? intdiv($seconds, 60) . ' min'
-            : $seconds . ' s';
+            ? intdiv($seconds, 60).' min'
+            : $seconds.' s';
     }
 }

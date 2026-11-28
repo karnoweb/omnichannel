@@ -10,7 +10,7 @@ use Karnoweb\Omnichannel\Exceptions\BranchAccessDeniedException;
 trait BranchScope
 {
     /**
-     * @param Builder<static> $query
+     * @param  Builder<static>  $query
      */
     public function scopeForBranch(Builder $query, int|string|null $branchId = null): Builder
     {

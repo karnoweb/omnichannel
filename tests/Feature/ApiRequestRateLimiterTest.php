@@ -6,11 +6,9 @@ namespace Karnoweb\Omnichannel\Tests\Feature;
 
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Http\ApiResponse;
-use Karnoweb\Omnichannel\Http\RateLimitContext;
-use Karnoweb\Omnichannel\Services\ApiRequestRateLimiter;
 use Karnoweb\Omnichannel\Services\ApiRequestRateLimitScope;
-use Karnoweb\Omnichannel\Tests\TestCase;
 use Karnoweb\Omnichannel\Tests\Support\DemoTestApiClient;
+use Karnoweb\Omnichannel\Tests\TestCase;
 
 final class ApiRequestRateLimiterTest extends TestCase
 {

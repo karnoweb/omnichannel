@@ -17,7 +17,7 @@
 
 ## شروع سریع محیط
 
-1. PHP 8.3+، Composer 2.x، extensionهای zip و sqlite (برای تست پیش‌فرض)
+1. PHP 8.4.1+، Composer 2.x، extensionهای zip و sqlite (برای تست پیش‌فرض)
 2. `composer install`
 3. `vendor/bin/phpunit --exclude-group redis`
 4. `vendor/bin/pint --test`

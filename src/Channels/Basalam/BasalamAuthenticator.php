@@ -29,10 +29,10 @@ final class BasalamAuthenticator extends BaseApiClient
             'redirect_uri' => $config['redirect_uri'],
             'response_type' => 'code',
             'scope' => implode(' ', $config['scopes']),
-            'state' => $connectionId !== null ? $state . ':' . $connectionId : $state,
+            'state' => $connectionId !== null ? $state.':'.$connectionId : $state,
         ];
 
-        return rtrim((string) $config['auth_url'], '/') . '/oauth/authorize?' . http_build_query($query);
+        return rtrim((string) $config['auth_url'], '/').'/oauth/authorize?'.http_build_query($query);
     }
 
     public static function generateState(): string
@@ -46,7 +46,7 @@ final class BasalamAuthenticator extends BaseApiClient
         $config = $this->config();
 
         return $this->send(fn ($request): ApiResponse => ApiResponse::fromResponse(
-            $request->asForm()->post(rtrim((string) $config['auth_url'], '/') . '/oauth/token', [
+            $request->asForm()->post(rtrim((string) $config['auth_url'], '/').'/oauth/token', [
                 'grant_type' => 'authorization_code',
                 'client_id' => $config['client_id'],
                 'client_secret' => $config['client_secret'],
@@ -61,7 +61,7 @@ final class BasalamAuthenticator extends BaseApiClient
         $config = $this->config();
 
         return $this->send(fn ($request): ApiResponse => ApiResponse::fromResponse(
-            $request->asForm()->post(rtrim((string) $config['auth_url'], '/') . '/oauth/token', [
+            $request->asForm()->post(rtrim((string) $config['auth_url'], '/').'/oauth/token', [
                 'grant_type' => 'refresh_token',
                 'client_id' => $config['client_id'],
                 'client_secret' => $config['client_secret'],
@@ -264,7 +264,7 @@ final class BasalamAuthenticator extends BaseApiClient
             ?? $response->string('message')
             ?? $response->string('error_description')
             ?? $response->string('error')
-            ?? 'Basalam returned HTTP ' . ($response->status ?? 0) . '.';
+            ?? 'Basalam returned HTTP '.($response->status ?? 0).'.';
     }
 
     /**

@@ -35,7 +35,7 @@ final class NoHostDependencyTest extends TestCase
         $root = dirname(__DIR__, 2);
 
         foreach (self::SCANNED_DIRECTORIES as $directory) {
-            $path = $root . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $directory);
+            $path = $root.DIRECTORY_SEPARATOR.str_replace('/', DIRECTORY_SEPARATOR, $directory);
             $files = SourceScanner::phpFiles($path);
             $this->assertNotSame([], $files, "Expected at least one PHP file under {$directory}.");
 

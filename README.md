@@ -4,7 +4,7 @@ Laravel package for multi-channel publication (9 drivers). Version **13.3.1** (P
 
 ## Requirements
 
-- PHP ^8.3
+- PHP ^8.4.1
 - Laravel ^13
 
 ## Install

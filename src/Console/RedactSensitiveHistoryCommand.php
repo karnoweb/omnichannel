@@ -65,7 +65,7 @@ final class RedactSensitiveHistoryCommand extends Command
             $this->line("Scanned {$modelKey}.");
         }
 
-        $this->info(($apply ? 'Updated' : 'Would update') . " {$changed} records.");
+        $this->info(($apply ? 'Updated' : 'Would update')." {$changed} records.");
         if (! $apply) {
             $this->comment('Dry run only. Add --apply to write redacted values.');
         }

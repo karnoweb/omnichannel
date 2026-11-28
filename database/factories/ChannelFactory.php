@@ -24,7 +24,7 @@ class ChannelFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->unique()->word() . '-' . fake()->unique()->numberBetween(100, 99999);
+        $name = fake()->unique()->word().'-'.fake()->unique()->numberBetween(100, 99999);
 
         return [
             'name' => Str::title($name),

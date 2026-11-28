@@ -34,8 +34,7 @@ final class BasalamTransformer implements ContentTransformer
     }
 
     /**
-     * @param list<int> $photoIds
-     *
+     * @param  list<int>  $photoIds
      * @return array<string, mixed>
      */
     public function build(Publication $publication, array $photoIds, ?int $videoId, int $categoryId): array
@@ -151,7 +150,7 @@ final class BasalamTransformer implements ContentTransformer
             return '';
         }
 
-        if (preg_match('/^(.*?[.!?؟])\s/u', $firstLine . ' ', $matches) === 1) {
+        if (preg_match('/^(.*?[.!?؟])\s/u', $firstLine.' ', $matches) === 1) {
             return trim($matches[1]);
         }
 
@@ -160,7 +159,7 @@ final class BasalamTransformer implements ContentTransformer
 
     private function truncate(string $value, int $max): string
     {
-        return mb_strlen($value) <= $max ? $value : mb_substr($value, 0, $max - 1) . '…';
+        return mb_strlen($value) <= $max ? $value : mb_substr($value, 0, $max - 1).'…';
     }
 
     /**

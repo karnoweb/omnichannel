@@ -51,7 +51,7 @@ final readonly class ConnectionTestResult
             successful: false,
             failureClass: $failureClass,
             errorCode: $errorCode !== null ? app(SecretRedactor::class)->redactString($errorCode) : null,
-            errorMessage: app(SecretRedactor::class)->redactString($errorMessage, $account),
+            errorMessage: app(SecretRedactor::class)->redactString($errorMessage),
         );
     }
 

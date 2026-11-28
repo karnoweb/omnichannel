@@ -17,7 +17,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendMessage(string $token, array $payload): ApiResponse
     {
@@ -25,7 +25,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendPhoto(string $token, array $payload): ApiResponse
     {
@@ -33,7 +33,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendVideo(string $token, array $payload): ApiResponse
     {
@@ -41,7 +41,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendDocument(string $token, array $payload): ApiResponse
     {
@@ -49,7 +49,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendMediaGroup(string $token, array $payload): ApiResponse
     {
@@ -57,7 +57,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function editMessageText(string $token, array $payload): ApiResponse
     {
@@ -65,7 +65,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function editMessageCaption(string $token, array $payload): ApiResponse
     {
@@ -73,7 +73,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function deleteMessage(string $token, array $payload): ApiResponse
     {
@@ -81,7 +81,7 @@ class BotApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function pinChatMessage(string $token, array $payload): ApiResponse
     {
@@ -90,6 +90,6 @@ class BotApiClient extends BaseApiClient
 
     public function endpoint(string $token, string $method): string
     {
-        return rtrim($this->baseUrl, '/') . "/bot{$token}/{$method}";
+        return rtrim($this->baseUrl, '/')."/bot{$token}/{$method}";
     }
 }

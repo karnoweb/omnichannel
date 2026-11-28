@@ -101,7 +101,7 @@ final class WhatsAppTransformer implements ContentTransformer
 
         $prefix = (string) config('omnichannel.channels.whatsapp.retailer_id_prefix', 'sku');
 
-        return $prefix . '-' . $publication->product_id;
+        return $prefix.'-'.$publication->product_id;
     }
 
     private function availability(Publication $publication): string
@@ -169,13 +169,13 @@ final class WhatsAppTransformer implements ContentTransformer
         $base = config('omnichannel.channels.whatsapp.product_link_base');
 
         return is_string($base) && $base !== ''
-            ? rtrim($base, '/') . '/' . $publication->product_id
+            ? rtrim($base, '/').'/'.$publication->product_id
             : '';
     }
 
     private function truncate(string $value, int $max): string
     {
-        return mb_strlen($value) <= $max ? $value : mb_substr($value, 0, $max - 1) . '…';
+        return mb_strlen($value) <= $max ? $value : mb_substr($value, 0, $max - 1).'…';
     }
 
     /**

@@ -251,7 +251,7 @@ final class WhatsAppDriver implements ChannelDriver, DeactivatableChannelDriver
     }
 
     /**
-     * @param 'CREATE'|'UPDATE' $method
+     * @param  'CREATE'|'UPDATE'  $method
      */
     private function apply(Publication $publication, string $method): PublishResult
     {
@@ -323,7 +323,7 @@ final class WhatsAppDriver implements ChannelDriver, DeactivatableChannelDriver
     }
 
     /**
-     * @param array<string, mixed> $extra @return array<string, mixed>
+     * @param  array<string, mixed>  $extra  @return array<string, mixed>
      */
     private function recordPendingBatch(Publication $publication, string $operation, ApiResponse $response, array $extra = []): array
     {
@@ -334,19 +334,19 @@ final class WhatsAppDriver implements ChannelDriver, DeactivatableChannelDriver
     }
 
     /**
-     * @return list<string>
+     * @return list<string|null>
      */
     private function batchHandles(ApiResponse $response): array
     {
         $handles = $response->get('handles', []);
-        if (is_string($response->get('handle'))) {
+        if (! is_array($handles) || ! array_is_list($handles)) {
+            return [];
+        }
+        if (array_key_exists('handle', $response->data)) {
             $handles[] = $response->get('handle');
         }
-        if (! is_array($handles)) {
-            $handles = [];
-        }
 
-        return array_values(array_filter(array_map(static fn ($handle) => is_scalar($handle) ? (string) $handle : null, $handles)));
+        return array_map(static fn ($handle) => is_string($handle) ? $handle : null, $handles);
     }
 
     private function resolveProductId(string $catalogId, string $retailerId, string $token): ?string
@@ -384,7 +384,7 @@ final class WhatsAppDriver implements ChannelDriver, DeactivatableChannelDriver
     }
 
     /**
-     * @param array<string, mixed> $metadata
+     * @param  array<string, mixed>  $metadata
      */
     private function failureFrom(ApiResponse $response, array $metadata = []): PublishResult
     {

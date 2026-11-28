@@ -32,7 +32,7 @@ final class BasalamErrorMapper
 
         return $code !== null
             ? "basalam.{$code}"
-            : 'basalam.http.' . ($response->status ?? 0);
+            : 'basalam.http.'.($response->status ?? 0);
     }
 
     public function technicalMessage(ApiResponse $response): string
@@ -74,6 +74,6 @@ final class BasalamErrorMapper
         return $response->string('message')
             ?? $response->string('error')
             ?? $response->rawBody
-            ?? 'Basalam returned HTTP ' . ($response->status ?? 0) . ' with no error body.';
+            ?? 'Basalam returned HTTP '.($response->status ?? 0).' with no error body.';
     }
 }

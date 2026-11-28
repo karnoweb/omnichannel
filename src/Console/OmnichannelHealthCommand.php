@@ -6,6 +6,8 @@ namespace Karnoweb\Omnichannel\Console;
 
 use Illuminate\Console\Command;
 use Karnoweb\Omnichannel\Enums\PublicationStatus;
+use Karnoweb\Omnichannel\Models\ChannelConnection;
+use Karnoweb\Omnichannel\Models\Publication;
 use Karnoweb\Omnichannel\Omnichannel;
 use Karnoweb\Omnichannel\Support\OmnichannelContext;
 
@@ -18,9 +20,9 @@ final class OmnichannelHealthCommand extends Command
     public function handle(OmnichannelContext $context): int
     {
         return $context->runAsSystem(function (): int {
-            /** @var class-string<\Karnoweb\Omnichannel\Models\Publication> $publication */
+            /** @var class-string<Publication> $publication */
             $publication = Omnichannel::model('publication');
-            /** @var class-string<\Karnoweb\Omnichannel\Models\ChannelConnection> $connection */
+            /** @var class-string<ChannelConnection> $connection */
             $connection = Omnichannel::model('connection');
 
             $metrics = [

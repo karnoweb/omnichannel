@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Karnoweb\Omnichannel\Console;
 
 use Illuminate\Console\Command;
+use Karnoweb\Omnichannel\Models\Publication;
 use Karnoweb\Omnichannel\Omnichannel;
 use Karnoweb\Omnichannel\Support\OmnichannelContext;
 
@@ -26,7 +27,7 @@ final class PruneOmnichannelArtifactsCommand extends Command
         $apply = (bool) $this->option('apply');
 
         return $context->runAsSystem(function () use ($days, $apply): int {
-            /** @var class-string<\Karnoweb\Omnichannel\Models\Publication> $model */
+            /** @var class-string<Publication> $model */
             $model = Omnichannel::model('publication');
             $cutoff = now()->subDays($days);
             $query = $model::query()->where('updated_at', '<', $cutoff);

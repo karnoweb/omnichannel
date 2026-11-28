@@ -53,6 +53,6 @@ final class EitaaErrorMapper
 
         return $response->string('description')
             ?? $response->rawBody
-            ?? 'The Eitaa gateway returned HTTP ' . ($response->status ?? 0) . ' with no description.';
+            ?? 'The Eitaa gateway returned HTTP '.($response->status ?? 0).' with no description.';
     }
 }

@@ -96,3 +96,6 @@ php artisan migrate
 
 - [13.2.0](docs/releases/13.2.0.md) — [13.3.0](docs/releases/13.3.0.md)
 - شناسه‌های تغییر: [CHANGE-EVIDENCE.md](docs/phase-04/step-06/CHANGE-EVIDENCE.md)
+## حداقل PHP در تغییرات منتشرنشده
+
+حداقل نسخهٔ مورد نیاز برای اجرای بسته و ابزارهای آزمون PHP 8.4.1 است. پیش از نصب وابستگی‌ها، نسخهٔ PHP محیط اجرا و کارگر صف را کنترل کنید. برای بررسی وابستگی‌های قفل‌شده در محیط توسعه، فرمان `composer check-platform-reqs --lock` را اجرا کنید.

@@ -12,7 +12,7 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
 final readonly class MessengerLimits
 {
     /**
-     * @param array<string, mixed> $limits
+     * @param  array<string, mixed>  $limits
      */
     public function __construct(
         private array $limits,
@@ -184,7 +184,7 @@ final readonly class MessengerLimits
     public static function humanBytes(int $bytes): string
     {
         return $bytes >= 1048576
-            ? round($bytes / 1048576) . ' MB'
-            : round($bytes / 1024) . ' KB';
+            ? round($bytes / 1048576).' MB'
+            : round($bytes / 1024).' KB';
     }
 }

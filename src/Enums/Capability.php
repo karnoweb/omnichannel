@@ -33,7 +33,7 @@ enum Capability: string
 
     public function label(): string
     {
-        return trans('omnichannel::omnichannel.capability.' . $this->value);
+        return trans('omnichannel::omnichannel.capability.'.$this->value);
     }
 
     public function group(): string

@@ -32,8 +32,8 @@ class ChannelConnectionFactory extends Factory
             'channel_id' => ChannelFactory::new(),
             'name' => fake()->company(),
             'external_account_id' => (string) fake()->unique()->numberBetween(10_000, 999_999),
-            'external_account_name' => '@' . fake()->unique()->userName(),
-            'credentials' => ['access_token' => 'demo-token-' . fake()->uuid()],
+            'external_account_name' => '@'.fake()->unique()->userName(),
+            'credentials' => ['access_token' => 'demo-token-'.fake()->uuid()],
             'metadata' => [],
             'status' => ConnectionStatus::Active,
             'connected_at' => now(),
@@ -57,7 +57,7 @@ class ChannelConnectionFactory extends Factory
     {
         return $this->state(fn (): array => [
             'credentials' => [
-                'access_token' => 'IGQV-long-lived-' . fake()->uuid(),
+                'access_token' => 'IGQV-long-lived-'.fake()->uuid(),
                 'token_type' => 'bearer',
             ],
             'expires_at' => now()->addDays(60),
@@ -68,8 +68,8 @@ class ChannelConnectionFactory extends Factory
     {
         return $this->state(fn (): array => [
             'credentials' => [
-                'access_token' => 'bsl-' . fake()->uuid(),
-                'refresh_token' => 'bsl-refresh-' . fake()->uuid(),
+                'access_token' => 'bsl-'.fake()->uuid(),
+                'refresh_token' => 'bsl-refresh-'.fake()->uuid(),
             ],
             'metadata' => ['vendor_id' => fake()->numberBetween(1000, 9999)],
         ]);

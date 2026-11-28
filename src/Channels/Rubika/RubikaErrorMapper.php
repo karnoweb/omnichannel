@@ -43,8 +43,8 @@ final class RubikaErrorMapper
         $status = $response->string('status');
 
         return $status !== null && mb_strtoupper($status) !== 'OK'
-            ? 'rubika.' . mb_strtolower($status)
-            : 'rubika.http.' . ($response->status ?? 0);
+            ? 'rubika.'.mb_strtolower($status)
+            : 'rubika.http.'.($response->status ?? 0);
     }
 
     public function technicalMessage(ApiResponse $response): string
@@ -56,6 +56,6 @@ final class RubikaErrorMapper
         return $response->string('message')
             ?? $response->string('status')
             ?? $response->rawBody
-            ?? 'Rubika returned HTTP ' . ($response->status ?? 0) . ' with no description.';
+            ?? 'Rubika returned HTTP '.($response->status ?? 0).' with no description.';
     }
 }

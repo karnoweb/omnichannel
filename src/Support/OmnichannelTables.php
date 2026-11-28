@@ -21,6 +21,6 @@ final class OmnichannelTables
             return $table;
         }
 
-        return $prefix . $table;
+        return $prefix.$table;
     }
 }

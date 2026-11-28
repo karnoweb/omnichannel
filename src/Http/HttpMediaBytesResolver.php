@@ -10,8 +10,8 @@ use GuzzleHttp\Psr7\Utils;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Contracts\MediaBytesResolverContract;
 use Karnoweb\Omnichannel\Contracts\PublicationMediaStorageContract;
-use Karnoweb\Omnichannel\Models\PublicationMediaAsset;
 use Karnoweb\Omnichannel\Enums\MediaAssetStatus;
+use Karnoweb\Omnichannel\Models\PublicationMediaAsset;
 use RuntimeException;
 use Throwable;
 

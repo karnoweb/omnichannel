@@ -33,7 +33,7 @@ final class BasalamCategoryMapper
         }
 
         if ($connection !== null) {
-            $perConnection = data_get($connection->metadata, 'category_map.' . $internalCategory);
+            $perConnection = data_get($connection->metadata, 'category_map.'.$internalCategory);
 
             if (is_numeric($perConnection)) {
                 return (int) $perConnection;

@@ -6,11 +6,9 @@ namespace Karnoweb\Omnichannel\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Karnoweb\Omnichannel\Contracts\MediaBytesResolverContract;
 use Karnoweb\Omnichannel\Contracts\ProductRepository;
-use Karnoweb\Omnichannel\Omnichannel;
 use Karnoweb\Omnichannel\Support\OmnichannelTables;
 
 final class OmnichannelDoctorCommand extends Command

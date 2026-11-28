@@ -20,7 +20,7 @@ final class InstagramApiClient extends BaseApiClient
     public const STATUS_EXPIRED = 'EXPIRED';
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function createMediaContainer(string $igUserId, array $payload, string $token): ApiResponse
     {
@@ -73,7 +73,7 @@ final class InstagramApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function updateMedia(string $mediaId, array $payload, string $token): ApiResponse
     {
@@ -85,8 +85,8 @@ final class InstagramApiClient extends BaseApiClient
         $base = rtrim((string) config('omnichannel.channels.instagram.graph_url'), '/');
         $version = trim((string) config('omnichannel.channels.instagram.api_version'), '/');
 
-        $url = "{$base}/{$version}/" . ltrim($path, '/');
+        $url = "{$base}/{$version}/".ltrim($path, '/');
 
-        return $edge !== null ? $url . '/' . $edge : $url;
+        return $edge !== null ? $url.'/'.$edge : $url;
     }
 }

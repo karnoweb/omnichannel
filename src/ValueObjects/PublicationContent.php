@@ -13,9 +13,9 @@ use Karnoweb\Omnichannel\Enums\MediaType;
 final readonly class PublicationContent implements Arrayable
 {
     /**
-     * @param list<MediaItem>      $media
-     * @param list<string>         $hashtags
-     * @param array<string, mixed> $extra
+     * @param  list<MediaItem>  $media
+     * @param  list<string>  $hashtags
+     * @param  array<string, mixed>  $extra
      */
     public function __construct(
         public string $caption = '',
@@ -26,7 +26,7 @@ final readonly class PublicationContent implements Arrayable
     ) {}
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public static function fromArray(array $data): self
     {
@@ -53,8 +53,7 @@ final readonly class PublicationContent implements Arrayable
     }
 
     /**
-     * @param array<int|string, mixed> $hashtags
-     *
+     * @param  array<int|string, mixed>  $hashtags
      * @return list<string>
      */
     public static function normalizeHashtags(array $hashtags): array
@@ -136,16 +135,16 @@ final readonly class PublicationContent implements Arrayable
 
         $missing = array_values(array_filter(
             $this->hashtags,
-            fn (string $tag): bool => ! preg_match('/#' . preg_quote($tag, '/') . '\b/iu', $this->caption)
+            fn (string $tag): bool => ! preg_match('/#'.preg_quote($tag, '/').'\b/iu', $this->caption)
         ));
 
         if ($missing === []) {
             return $this->caption;
         }
 
-        $tags = implode(' ', array_map(static fn (string $tag): string => '#' . $tag, $missing));
+        $tags = implode(' ', array_map(static fn (string $tag): string => '#'.$tag, $missing));
 
-        return trim($this->caption) === '' ? $tags : trim($this->caption) . "\n\n" . $tags;
+        return trim($this->caption) === '' ? $tags : trim($this->caption)."\n\n".$tags;
     }
 
     public function totalHashtagCount(): int
@@ -168,7 +167,7 @@ final readonly class PublicationContent implements Arrayable
     }
 
     /**
-     * @param list<MediaItem> $media
+     * @param  list<MediaItem>  $media
      */
     public function withMedia(array $media): self
     {

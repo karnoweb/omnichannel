@@ -31,8 +31,8 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
  * @property int $id
  * @property int|string|null $branch_id
  * @property int|string|null $created_by
- * @property string|null            $product_id
- * @property PublicationSourceType  $source_type
+ * @property string|null $product_id
+ * @property PublicationSourceType $source_type
  * @property string|null $product_name
  * @property int $channel_id
  * @property int $channel_connection_id

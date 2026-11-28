@@ -29,10 +29,10 @@ final class InstagramAuthenticator extends BaseApiClient
             'redirect_uri' => $config['redirect_uri'],
             'response_type' => 'code',
             'scope' => implode(',', $config['scopes']),
-            'state' => $connectionId !== null ? $state . ':' . $connectionId : $state,
+            'state' => $connectionId !== null ? $state.':'.$connectionId : $state,
         ];
 
-        return $config['oauth_authorize_url'] . '?' . http_build_query($query);
+        return $config['oauth_authorize_url'].'?'.http_build_query($query);
     }
 
     public static function generateState(): string
@@ -60,7 +60,7 @@ final class InstagramAuthenticator extends BaseApiClient
     {
         $config = $this->config();
 
-        return $this->get($config['graph_url'] . '/access_token', [
+        return $this->get($config['graph_url'].'/access_token', [
             'grant_type' => 'ig_exchange_token',
             'client_secret' => $config['client_secret'],
             'access_token' => $shortLivedToken,
@@ -71,7 +71,7 @@ final class InstagramAuthenticator extends BaseApiClient
     {
         $config = $this->config();
 
-        return $this->get($config['graph_url'] . '/refresh_access_token', [
+        return $this->get($config['graph_url'].'/refresh_access_token', [
             'grant_type' => 'ig_refresh_token',
             'access_token' => $longLivedToken,
         ]);
@@ -131,7 +131,7 @@ final class InstagramAuthenticator extends BaseApiClient
         $connection->forceFill([
             'external_account_id' => $profile->string('user_id') ?? $short->string('user_id'),
             'external_account_name' => $profile->string('username') !== null
-                ? '@' . $profile->string('username')
+                ? '@'.$profile->string('username')
                 : $connection->external_account_name,
             'status' => ConnectionStatus::Active,
             'status_message' => null,
@@ -219,7 +219,7 @@ final class InstagramAuthenticator extends BaseApiClient
         return $response->transportError
             ?? $response->string('error_message')
             ?? $response->string('error.message')
-            ?? 'Instagram returned HTTP ' . ($response->status ?? 0) . '.';
+            ?? 'Instagram returned HTTP '.($response->status ?? 0).'.';
     }
 
     /**

@@ -19,7 +19,7 @@ final class BasalamApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function createProduct(int|string $vendorId, array $payload, string $token): ApiResponse
     {
@@ -27,7 +27,7 @@ final class BasalamApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function updateProduct(int|string $productId, array $payload, string $token): ApiResponse
     {
@@ -40,7 +40,7 @@ final class BasalamApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $query
+     * @param  array<string, mixed>  $query
      */
     public function getVendorProducts(int|string $vendorId, string $token, array $query = []): ApiResponse
     {
@@ -75,6 +75,6 @@ final class BasalamApiClient extends BaseApiClient
 
     private function url(string $path): string
     {
-        return rtrim((string) config('omnichannel.channels.basalam.base_url'), '/') . $path;
+        return rtrim((string) config('omnichannel.channels.basalam.base_url'), '/').$path;
     }
 }

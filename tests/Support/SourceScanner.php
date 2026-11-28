@@ -65,8 +65,7 @@ final class SourceScanner
     }
 
     /**
-     * @param array<int, array{0: int, 1: string, 2: int}|string> $tokens
-     *
+     * @param  array<int, array{0: int, 1: string, 2: int}|string>  $tokens
      * @return list<string>
      */
     private static function parseUseStatement(array $tokens, int &$index): array
@@ -98,7 +97,7 @@ final class SourceScanner
                 if ($piece === '') {
                     continue;
                 }
-                $names[] = $prefix . '\\' . $piece;
+                $names[] = $prefix.'\\'.$piece;
             }
 
             return $names;

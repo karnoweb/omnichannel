@@ -22,7 +22,7 @@ final class ChannelManager
     public function __construct(private readonly Container $container) {}
 
     /**
-     * @param callable(Container): ChannelDriver $factory
+     * @param  callable(Container): ChannelDriver  $factory
      */
     public function extend(string $key, callable $factory): self
     {

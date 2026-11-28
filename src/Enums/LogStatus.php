@@ -13,7 +13,7 @@ enum LogStatus: string
 
     public function label(): string
     {
-        return trans('omnichannel::omnichannel.log_status.' . $this->value);
+        return trans('omnichannel::omnichannel.log_status.'.$this->value);
     }
 
     public function color(): string

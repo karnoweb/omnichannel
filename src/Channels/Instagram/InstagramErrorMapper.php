@@ -60,7 +60,7 @@ final class InstagramErrorMapper
         $subcode = $response->int('error.error_subcode');
 
         if ($code === null) {
-            return 'instagram.http.' . ($response->status ?? 0);
+            return 'instagram.http.'.($response->status ?? 0);
         }
 
         return $subcode !== null
@@ -77,7 +77,7 @@ final class InstagramErrorMapper
         return $response->string('error.error_user_msg')
             ?? $response->string('error.message')
             ?? $response->rawBody
-            ?? 'Instagram returned HTTP ' . ($response->status ?? 0) . ' with no error body.';
+            ?? 'Instagram returned HTTP '.($response->status ?? 0).' with no error body.';
     }
 
     private function errorCode(ApiResponse $response): ?int

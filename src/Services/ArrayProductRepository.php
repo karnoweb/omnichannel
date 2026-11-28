@@ -12,7 +12,7 @@ use Karnoweb\Omnichannel\Support\OmnichannelContext;
 final class ArrayProductRepository implements BranchScopedProductRepository
 {
     /**
-     * @param list<array<string, mixed>> $products
+     * @param  list<array<string, mixed>>  $products
      */
     public function __construct(
         private readonly array $products = [],

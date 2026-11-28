@@ -7,7 +7,6 @@ namespace Karnoweb\Omnichannel\Services;
 use Karnoweb\Omnichannel\Contracts\SupportsMarketplaceTaxonomy;
 use Karnoweb\Omnichannel\Models\ChannelConnection;
 use Karnoweb\Omnichannel\Models\ExternalCategory;
-use Karnoweb\Omnichannel\Services\ChannelManager;
 
 final class MarketplaceTaxonomyService
 {

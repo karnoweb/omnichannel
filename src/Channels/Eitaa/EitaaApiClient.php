@@ -11,7 +11,7 @@ use Karnoweb\Omnichannel\Http\BaseApiClient;
 final class EitaaApiClient extends BaseApiClient
 {
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendMessage(string $token, array $payload): ApiResponse
     {
@@ -21,7 +21,7 @@ final class EitaaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, scalar> $fields
+     * @param  array<string, scalar>  $fields
      */
     public function sendFile(string $token, array $fields, string $contents, string $filename): ApiResponse
     {

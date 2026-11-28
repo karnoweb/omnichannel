@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Karnoweb\Omnichannel\Tests\Feature;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
+use Karnoweb\Omnichannel\Http\ApiResponse;
+use Karnoweb\Omnichannel\Http\RateLimitContext;
 use Karnoweb\Omnichannel\Services\ApiRequestRateLimitScope;
 use Karnoweb\Omnichannel\Tests\Support\DemoTestApiClient;
 use Karnoweb\Omnichannel\Tests\TestCase;
@@ -18,13 +21,13 @@ final class DriverRequestCountingTest extends TestCase
             'omnichannel.http.retries' => 2,
         ]);
         Http::fake(function () {
-            throw new \Illuminate\Http\Client\ConnectionException('down');
+            throw new ConnectionException('down');
         });
 
         $scope = app(ApiRequestRateLimitScope::class);
         $client = new class extends DemoTestApiClient
         {
-            public function retryPing(): \Karnoweb\Omnichannel\Http\ApiResponse
+            public function retryPing(): ApiResponse
             {
                 return $this->get('https://demo.local/ping', [], null, true);
             }
@@ -32,7 +35,7 @@ final class DriverRequestCountingTest extends TestCase
 
         $scope->usingDriverKey('demo', 'acct-1', 1, fn () => $client->retryPing());
 
-        $fingerprint = \Karnoweb\Omnichannel\Http\RateLimitContext::forConnection('demo', 'acct-1', 1)->cacheKey();
+        $fingerprint = RateLimitContext::forConnection('demo', 'acct-1', 1)->cacheKey();
         self::assertGreaterThanOrEqual(2, (int) cache()->get($fingerprint, 0));
     }
 }

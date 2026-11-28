@@ -15,9 +15,9 @@ use Karnoweb\Omnichannel\ValueObjects\PublicationContent;
 final readonly class PublishableProduct implements Arrayable
 {
     /**
-     * @param list<MediaItem> $images
-     * @param list<MediaItem> $videos
-     * @param list<string>    $tags
+     * @param  list<MediaItem>  $images
+     * @param  list<MediaItem>  $videos
+     * @param  list<string>  $tags
      */
     public function __construct(
         public string $id,
@@ -36,7 +36,7 @@ final readonly class PublishableProduct implements Arrayable
     ) {}
 
     /**
-     * @param array<string, mixed> $data
+     * @param  array<string, mixed>  $data
      */
     public static function fromArray(array $data): self
     {
@@ -58,8 +58,7 @@ final readonly class PublishableProduct implements Arrayable
     }
 
     /**
-     * @param array<int, mixed> $items
-     *
+     * @param  array<int, mixed>  $items
      * @return list<MediaItem>
      */
     private static function mediaList(mixed $items, MediaType $type): array
@@ -101,7 +100,7 @@ final readonly class PublishableProduct implements Arrayable
 
     public function formattedPrice(): string
     {
-        return number_format($this->price) . ' ' . $this->currency;
+        return number_format($this->price).' '.$this->currency;
     }
 
     public function toDefaultContent(): PublicationContent
@@ -119,7 +118,7 @@ final readonly class PublishableProduct implements Arrayable
         ], static fn (mixed $v): bool => $v !== null && $v !== []);
 
         return new PublicationContent(
-            caption: trim($this->name . ($this->description !== '' ? "\n\n" . $this->description : '')),
+            caption: trim($this->name.($this->description !== '' ? "\n\n".$this->description : '')),
             media: $this->allMedia(),
             hashtags: $this->tags,
             title: $this->name,

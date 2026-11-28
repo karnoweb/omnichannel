@@ -12,12 +12,12 @@ use Karnoweb\Omnichannel\Database\Seeders\ChannelSeeder;
 use Karnoweb\Omnichannel\Omnichannel;
 
 /**
- * @property int                       $id
- * @property string                    $name
- * @property string                    $slug
- * @property string                    $driver
- * @property bool                      $enabled
- * @property int                       $sort_order
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $driver
+ * @property bool $enabled
+ * @property int $sort_order
  * @property array<string, mixed>|null $metadata
  */
 class Channel extends BaseModel
@@ -69,7 +69,7 @@ class Channel extends BaseModel
     }
 
     /**
-     * @param Builder<static> $query
+     * @param  Builder<static>  $query
      */
     public function scopeEnabled(Builder $query): void
     {
@@ -78,9 +78,9 @@ class Channel extends BaseModel
 
     public function config(?string $key = null, mixed $default = null): mixed
     {
-        $path = 'omnichannel.channels.' . $this->driver;
+        $path = 'omnichannel.channels.'.$this->driver;
 
-        return config($key === null ? $path : $path . '.' . $key, $default);
+        return config($key === null ? $path : $path.'.'.$key, $default);
     }
 
     protected static function newFactory(): ChannelFactory

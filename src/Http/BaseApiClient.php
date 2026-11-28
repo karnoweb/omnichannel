@@ -8,7 +8,6 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 use Karnoweb\Omnichannel\Exceptions\RateLimitExceededException;
-use Karnoweb\Omnichannel\Http\RateLimitContext;
 use Karnoweb\Omnichannel\Services\ApiRequestRateLimiter;
 use Karnoweb\Omnichannel\Services\ApiRequestRateLimitScope;
 use Karnoweb\Omnichannel\Services\SecretRedactor;

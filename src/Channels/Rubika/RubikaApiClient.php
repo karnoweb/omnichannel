@@ -15,7 +15,7 @@ final class RubikaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendMessage(string $token, array $payload): ApiResponse
     {
@@ -23,7 +23,7 @@ final class RubikaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function sendFile(string $token, array $payload): ApiResponse
     {
@@ -36,7 +36,7 @@ final class RubikaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function editMessageText(string $token, array $payload): ApiResponse
     {
@@ -44,7 +44,7 @@ final class RubikaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function deleteMessage(string $token, array $payload): ApiResponse
     {
@@ -52,7 +52,7 @@ final class RubikaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function getChat(string $token, array $payload): ApiResponse
     {
@@ -77,7 +77,7 @@ final class RubikaApiClient extends BaseApiClient
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     private function call(string $token, string $method, array $payload = []): ApiResponse
     {

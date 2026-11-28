@@ -11,13 +11,13 @@ use Karnoweb\Omnichannel\Models\ChannelConnection;
 final class ConnectionTokenRefreshLock
 {
     /**
-     * @param callable(ChannelConnection): bool $refresh
+     * @param  callable(ChannelConnection): bool  $refresh
      */
     public function run(ChannelConnection $connection, callable $refresh): bool
     {
         $connectionId = $connection->getKey();
         $lock = Cache::lock(
-            'omnichannel:token-refresh:' . $connectionId,
+            'omnichannel:token-refresh:'.$connectionId,
             max(30, (int) config('omnichannel.queue.token_refresh_lock_seconds', 180)),
         );
 

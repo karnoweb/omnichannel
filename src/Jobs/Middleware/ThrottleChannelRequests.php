@@ -17,7 +17,7 @@ final class ThrottleChannelRequests
 
     public function handle(object $job, Closure $next): mixed
     {
-        $key = 'omnichannel-throttle:' . $this->channelKey;
+        $key = 'omnichannel-throttle:'.$this->channelKey;
 
         $max = $this->maxAttempts ?? (int) config(
             "omnichannel.channels.{$this->channelKey}.rate_limit.attempts",

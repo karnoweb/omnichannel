@@ -8,6 +8,7 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Karnoweb\Omnichannel\Contracts\ReconcilableChannelDriver;
+use Karnoweb\Omnichannel\Enums\FailureClass;
 use Karnoweb\Omnichannel\Enums\LogOperation;
 use Karnoweb\Omnichannel\Enums\PublicationStatus;
 use Karnoweb\Omnichannel\Models\Publication;
@@ -86,7 +87,7 @@ final class PublicationRecoveryService
                 $publication->markPublished($externalId, is_string($evidence['external_url'] ?? null) ? $evidence['external_url'] : null);
             } elseif ($outcome === ReconciliationResult::ConfirmedFailure) {
                 $publication->markFailed(
-                    \Karnoweb\Omnichannel\Enums\FailureClass::Unknown,
+                    FailureClass::Unknown,
                     'recovery.confirmed_failure',
                     $reason,
                 );

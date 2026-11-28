@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Karnoweb\Omnichannel\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Karnoweb\Omnichannel\Omnichannel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Karnoweb\Omnichannel\Omnichannel;
 
 class ExternalCategory extends BaseModel
 {
